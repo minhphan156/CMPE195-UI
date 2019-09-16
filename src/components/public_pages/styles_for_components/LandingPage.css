@@ -1,0 +1,219 @@
+/* X-Small Screen */
+@media screen and (max-width: 600px) {
+  #ServiceOverviewContainer {
+    height: 820px;
+    top: 100px;
+    background-color: #f6f6fb;
+  }
+
+  #ServiceOverviewContainerText {
+    font-size: 16px;
+    font-weight: 300;
+    position: relative;
+    top: 30px;
+    text-align: center;
+  }
+
+  img.landing-images {
+    width: 55%;
+  }
+
+  #ContainerTwoTitle {
+    color: #2b7a8d;
+    font-size: 23px;
+    font-weight: 900;
+    position: relative;
+    top: 58px;
+    left: 30px;
+  }
+
+  #ContainerTwoText {
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 93px;
+    left: 30px;
+  }
+
+  #ContainerTwoContainer {
+    height: 570px;
+    background-color: #fbfcfe;
+    background-image: url("../../../assets/Landing_Illustration.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: auto 50%;
+    position: relative;
+  }
+}
+
+/* Small Screen */
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  #ServiceOverviewContainer {
+    height: 350px;
+    top: 100px;
+    background-color: #f6f6fb;
+  }
+
+  #ServiceOverviewContainerText {
+    font-size: 17px;
+    font-weight: 300;
+    position: relative;
+    top: 30px;
+    text-align: center;
+  }
+
+  img.landing-images {
+    position: relative;
+    width: 150px;
+  }
+
+  #ContainerTwoTitle {
+    color: #2b7a8d;
+    font-size: 30px;
+    font-weight: 900;
+    position: relative;
+    top: 98px;
+    left: 100px;
+  }
+
+  #ContainerTwoText {
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 133px;
+    left: 100px;
+  }
+
+  #ContainerTwoContainer {
+    height: 928px;
+    background-color: #fbfcfe;
+    background-image: url("../../../assets/Landing_Illustration.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: auto 65%;
+    position: relative;
+  }
+}
+
+/* Medium Screen (Landscape Phones, Tablets) */
+@media screen and (min-width: 960px) and (max-width: 1200px) {
+  #ServiceOverviewContainer {
+    height: 350px;
+    top: 100px;
+    background-color: #f6f6fb;
+  }
+
+  #ServiceOverviewContainerText {
+    font-size: 19px;
+    font-weight: 300;
+    position: relative;
+    top: 30px;
+    text-align: center;
+  }
+
+  img.landing-images {
+    position: relative;
+    width: 150px;
+  }
+
+  #ContainerTwoTitle {
+    color: #2b7a8d;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 128px;
+    left: 15%;
+  }
+
+  #ContainerTwoText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 163px;
+    left: 15%;
+  }
+
+  #ContainerTwoContainer {
+    height: 528px;
+    background-color: #fbfcfe;
+    background-image: url("../../../assets/Landing_Illustration.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 80%;
+    position: relative;
+  }
+}
+
+/* Large Screen (Laptops, Desktop monitors) */
+@media screen and (min-width: 1200px) {
+  #ServiceOverviewContainer {
+    height: 350px;
+    top: 100px;
+    background-color: #f6f6fb;
+  }
+
+  #ServiceOverviewContainerText {
+    font-size: 20px;
+    font-weight: 300;
+    position: relative;
+    top: 30px;
+    text-align: center;
+  }
+
+  img.landing-images {
+    width: 65%;
+    height: auto;
+  }
+
+  #ContainerTwoTitle {
+    color: #2b7a8d;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 128px;
+    left: 15%;
+  }
+
+  #ContainerTwoText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 163px;
+    left: 15%;
+  }
+  #ContainerTwoContainer {
+    height: 528px;
+    background-color: #fbfcfe;
+    background-image: url("../../../assets/Landing_Illustration.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: auto 90%;
+    position: relative;
+  }
+}
+
+#LandingPageBody {
+  overflow-x: hidden;
+}
+
+.ContainerTwoLink {
+  text-decoration: none;
+  color: Black;
+  border-bottom: 2px solid #f1615d;
+}
+
+.ContainerTwoLink:hover {
+  text-decoration: none;
+  color: Black;
+  border-bottom: 4px solid #f1615d;
+}
+
+.ContainerTwoLink:visited {
+  text-decoration: none;
+  color: Black;
+  border-bottom: 2px solid #445ea5;
+}

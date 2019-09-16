@@ -1,0 +1,224 @@
+/* X-Small Screen */
+@media screen and (max-width: 600px) {
+  .securityHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #SecurityManifestoTitle {
+    color: #2b7a8d;
+    font-size: 23px;
+    font-weight: 900;
+    position: relative;
+    top: 30px;
+    left: 30px;
+  }
+
+  #SecurityManifestoText {
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    left: 30px;
+  }
+
+  .securityHeaderTitle {
+    display: none;
+  }
+
+  .securityHeaderText {
+    display: none;
+  }
+
+  #SecurityContainerOne {
+    height: 310px;
+    background-color: #ececf2;
+  }
+  #SecurityContainerTwo {
+    height: 310px;
+    background-color: #f6f6fa;
+  }
+  #SecurityContainerThree {
+    height: 310px;
+    background-color: #fbfbfd;
+  }
+  #SecurityContainerAll {
+    height: 930px;
+    background-color: #fbfbfd;
+  }
+}
+
+/* Small Screen */
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  .securityHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #SecurityManifestoTitle {
+    color: #2b7a8d;
+    font-size: 29px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    left: 100px;
+  }
+
+  #SecurityManifestoText {
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 10px;
+    left: 100px;
+  }
+
+  .securityHeaderTitle {
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .securityHeaderText {
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  #SecurityContainerOne {
+    height: 310px;
+    background-color: #ececf2;
+  }
+  #SecurityContainerTwo {
+    height: 310px;
+    background-color: #f6f6fa;
+  }
+  #SecurityContainerThree {
+    height: 310px;
+    background-color: #fbfbfd;
+  }
+  #SecurityContainerAll {
+    height: 930px;
+    background-color: #fbfbfd;
+  }
+}
+
+/* Medium Screen (Landscape Phones, Tablets) */
+@media screen and (min-width: 960px) and (max-width: 1200px) {
+  .securityHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #SecurityManifestoTitle {
+    color: #2b7a8d;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    left: 15%;
+  }
+
+  #SecurityManifestoText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    left: 15%;
+  }
+
+  .securityHeaderTitle {
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .securityHeaderText {
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  #SecurityContainerOne {
+    height: 310px;
+    background-color: #ececf2;
+  }
+  #SecurityContainerTwo {
+    height: 310px;
+    background-color: #f6f6fa;
+  }
+  #SecurityContainerThree {
+    height: 310px;
+    background-color: #fbfbfd;
+  }
+  #SecurityContainerAll {
+    height: 930px;
+    background-color: #fbfbfd;
+  }
+}
+
+/* Large Screen (Laptops, Desktop monitors) */
+@media screen and (min-width: 1200px) {
+  .securityHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #SecurityManifestoTitle {
+    color: #2b7a8d;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    left: 15%;
+  }
+
+  #SecurityManifestoText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    left: 15%;
+  }
+
+  .securityHeaderTitle {
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .securityHeaderText {
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  #SecurityContainerOne {
+    height: 310px;
+    background-color: #ececf2;
+  }
+  #SecurityContainerTwo {
+    height: 310px;
+    background-color: #f6f6fa;
+  }
+  #SecurityContainerThree {
+    height: 310px;
+    background-color: #fbfbfd;
+  }
+  #SecurityContainerAll {
+    height: 930px;
+    background-color: #fbfbfd;
+  }
+}
+
+#SecurityManifestoPageBody {
+  overflow-x: hidden;
+}
