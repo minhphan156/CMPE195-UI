@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
@@ -15,7 +14,7 @@ import MDSpinner from "react-md-spinner";
 import Done from "@material-ui/icons/Done";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import "filepond/dist/filepond.min.css";
-import { withAuth } from "@okta/okta-react";
+import { withAuth } from '@okta/okta-react';
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -64,7 +63,7 @@ class Upload extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const time = moment().format("dddd, MMMM Do YYYY, h:mm a");
+    const time = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     const uploadData = {
       title: this.state.title,
       authors: this.state.authors,
@@ -76,12 +75,9 @@ class Upload extends Component {
     };
     this.setState({ isSubmit: true });
 
-    this.props.auth
-      .getAccessToken()
-      .then(token => {
-        this.props.uploadNotebook(uploadData, this.props.history, token);
-      })
-      .catch(err => console.log(err));
+    this.props.auth.getAccessToken().then(token => {
+      this.props.uploadNotebook(uploadData, this.props.history, token);
+    }).catch(err => console.log(err));
   }
 
   handleInit() {
@@ -203,20 +199,18 @@ class Upload extends Component {
           />
           {upload ? (
             <div style={{ width: 350 }}>
-              <Link to="/preview" className="navbarMenuButtons">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  style={{
-                    marginTop: 10,
-                    width: 300,
-                    marginBottom: 15
-                  }}
-                >
-                  Preview
-                </Button>
-              </Link>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{
+                  marginTop: 10,
+                  width: 300,
+                  marginBottom: 15
+                }}
+              >
+                Preview
+              </Button>
               <Done
                 style={{ color: "green", marginLeft: 5, marginBottom: -6 }}
               />
@@ -264,9 +258,7 @@ const mapStateToProps = state => ({
   upload: state.upload
 });
 
-export default connect(mapStateToProps)(withAuth(Upload));
-
-// export default connect(
-//   mapStateToProps,
-//   { uploadNotebook }
-// )(withAuth(Upload));
+export default connect(
+  mapStateToProps,
+  { uploadNotebook }
+)(withAuth(Upload));
