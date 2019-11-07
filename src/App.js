@@ -27,12 +27,9 @@ import AccessToken from "./components/dev/AccessToken";
 
 import Login from "./Login";
 import Post from "./components/post/Post";
-import Preview from "./components/post/PreviewOfPost";
-
 import Upload from "./components/upload/Upload";
-import Uploadpreview from "./components/upload/Uploadpreview";
 
-import Feed from "./components/feed/Feed";
+import Explore from "./components/explore/Explore";
 
 function customAuthHandler({ history }) {
   // Redirect to the /login page that has a CustomLoginComponent
@@ -73,8 +70,7 @@ class App extends Component {
                 {/* <Route exact path="/SignIn" component={SignIn} /> */}
                 <Route exact path="/upload" component={Upload} />
                 <Route exact path="/post" component={Post} />
-                <Route exact path="/preview" component={Preview} />
-                <Route exact path="/feed" component={Feed} />
+                <Route exact path="/explore" component={Explore} />
                 <Route exact path="/login" component={Login} />
               </Switch>
 

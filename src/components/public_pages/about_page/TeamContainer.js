@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import "../styles_for_components/LandingPage.css";
 import { withAuth } from "@okta/okta-react";
 import Sandro from "../../../assets/Sandro.png";
+import Danil from "../../../assets/Danil.png";
 import Minh from "../../../assets/Minh.png";
 import Antonio from "../../../assets/Antonio.png";
 import Vinny from "../../../assets/Vinny.png";
+import Margot from "../../../assets/Margot.png";
 
 export default withAuth(
   class AboutContainers extends Component {
@@ -46,6 +48,10 @@ export default withAuth(
                   <br /> <div id="AboutPageNames">Antonio G Bares</div>
                 </Grid>
                 <Grid item>
+                  <img className="aboutPage-images" src={Danil} alt="" />
+                  <br /> <div id="AboutPageNames">Danil Kolesnikov</div>
+                </Grid>
+                <Grid item>
                   <img className="aboutPage-images" src={Vinny} alt="" />
                   <br /> <div id="AboutPageNames">Vinny Senthil</div>
                 </Grid>
@@ -64,6 +70,10 @@ export default withAuth(
                 <Grid item>
                   <img className="aboutPage-images" src={Minh} alt="" />
                   <br /> <div id="AboutPageNames">Minh Phan</div>
+                </Grid>
+                <Grid item>
+                  <img className="aboutPage-images" src={Margot} alt="" />
+                  <br /> <div id="AboutPageNames">Margot Uchicua</div>
                 </Grid>
               </Grid>
             </Grid>
