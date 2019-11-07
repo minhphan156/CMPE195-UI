@@ -20,6 +20,8 @@ export default withAuth(
 
     async componentDidMount() {
       this.checkAuthentication();
+      window.scrollTo(0, 0);
+
     }
 
     async componentDidUpdate() {

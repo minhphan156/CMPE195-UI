@@ -15,7 +15,9 @@ export default withAuth(
       // this.logout = this.logout.bind(this);
     }
 
-    async componentDidMount() {}
+    async componentDidMount() {
+      window.scrollTo(0, 0);
+    }
 
     async componentDidUpdate() {}
 

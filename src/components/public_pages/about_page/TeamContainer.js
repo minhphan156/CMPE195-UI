@@ -24,7 +24,7 @@ export default withAuth(
         <div>
           <Grid container id="TeamContainer">
             <Grid id="AboutContainerTitle" item xs={12} lg={12}>
-              Our Team
+              Our Team <br /> <br />
             </Grid>
 
             <Grid
@@ -50,6 +50,7 @@ export default withAuth(
                   <br /> <div id="AboutPageNames">Vinny Senthil</div>
                 </Grid>
               </Grid>
+              <br /> <br /> <br /> <br /> <br />
               <Grid
                 container
                 spacing={0}
@@ -65,7 +66,6 @@ export default withAuth(
                   <img className="aboutPage-images" src={Minh} alt="" />
                   <br /> <div id="AboutPageNames">Minh Phan</div>
                 </Grid>
-
               </Grid>
             </Grid>
           </Grid>

@@ -47,8 +47,8 @@ export default withAuth(
                   md={5}
                   lg={4}
                 >
-                  We empower researchers and data scientists at large
-                  organizations to share their proprietary research at scale.
+                  We empower researchers and data scientists at universities to
+                  share their proprietary research at scale.
                 </Grid>
               </Grid>
 
@@ -82,8 +82,8 @@ export default withAuth(
                   md={4}
                   lg={4}
                 >
-                  We empower researchers and data scientists at large
-                  organizations to share their proprietary research at scale.
+                  We empower researchers and data scientists at universities to
+                  share their proprietary research at scale.
                 </Grid>
               </Grid>
             </div>

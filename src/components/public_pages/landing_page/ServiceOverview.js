@@ -40,13 +40,13 @@ export default withAuth(
               <img className="landing-images" src={JupLogo2} alt="" />
               <br />
               <br />
-              Share Jupyter Notebooks with colleagues
+              Rest assured, your data is secure
             </Grid>
 
             <Grid id="ServiceOverviewContainerText" item xs={7} sm={2} lg={2}>
               <img className="landing-images" src={JupLogo2} alt="" />
               <br /> <br />
-              Improve your ability to reproduc
+              Find new insights, more efficiently
             </Grid>
           </Grid>
         </div>

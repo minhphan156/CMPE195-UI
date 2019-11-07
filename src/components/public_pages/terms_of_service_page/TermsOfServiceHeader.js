@@ -37,7 +37,7 @@ export default withAuth(
                   md={8}
                   lg={8}
                 >
-                  Terms Of Service...
+                  Terms Of Service
                 </Grid>
                 <Grid
                   className="AboutHeaderText"
@@ -47,8 +47,9 @@ export default withAuth(
                   md={6}
                   lg={6}
                 >
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt
+                  The following Terms of Service dictate permissible access and
+                  use of all services and products (“Services”) provided by SURD
+                  Technologies
                 </Grid>
               </Grid>
 

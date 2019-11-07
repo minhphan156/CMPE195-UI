@@ -26,15 +26,14 @@ export default withAuth(
             direction="row"
             justify="center"
           >
-            <Grid id="AboutContainerTitle" item xs={12} lg={12}>
-              Terms Of Service
-            </Grid>
-
             <Grid id="AboutContainerText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet.
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, SURD TECHNOLOGY SHALL NOT
+              BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, INDIRECT,
+              PUNITIVE, OR SPECIAL DAMAGES, LOSS OF PROFITS, DATA OR REVENUES,
+              OR OTHER INTANGIBLE LOSSES, RESULTING FROM ANY OF THE FOLLOWING:
+              <br></br>
+              <br></br>· YOUR USE OF OUR SERVICES<br></br>
+              <br></br>· YOUR INABILITY TO ACCESS OR USE ANY OF OUR SERVICES
             </Grid>
           </Grid>
         </div>

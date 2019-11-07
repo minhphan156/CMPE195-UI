@@ -12,7 +12,7 @@
     font-size: 23px;
     font-weight: 900;
     position: relative;
-    top: 30px;
+    /* top: 30px; */
     text-align: center;
   }
 
@@ -25,7 +25,8 @@
   }
 
   #TeamContainer {
-    height: 750px;
+    padding-top: 80px;
+    padding-bottom: 70px;
     background-color: #fbfbfd;
   }
 
@@ -60,7 +61,7 @@
 /* Small Screen */
 @media screen and (min-width: 600px) and (max-width: 960px) {
   .aboutHeaderContainer {
-    height: 300px;
+    height: 280px;
     overflow-x: hidden;
     background-color: #3d4e96; /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
@@ -71,7 +72,7 @@
     font-size: 29px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    /* top: 45px; */
     text-align: center;
   }
 
@@ -80,11 +81,12 @@
     font-weight: 300;
     color: black;
     position: relative;
-    top: 10px;
+    /* top: 10px; */
   }
 
   #TeamContainer {
-    height: 650px;
+    padding-top: 80px;
+    padding-bottom: 70px;
     background-color: #fbfbfd;
   }
 
@@ -121,7 +123,7 @@
 /* Medium Screen (Landscape Phones, Tablets) */
 @media screen and (min-width: 960px) and (max-width: 1200px) {
   .aboutHeaderContainer {
-    height: 300px;
+    height: 280px;
     overflow-x: hidden;
     background-color: #3d4e96; /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
@@ -132,7 +134,7 @@
     font-size: 34px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    /* top: 45px; */
     text-align: center;
   }
 
@@ -144,7 +146,8 @@
   }
 
   #TeamContainer {
-    height: 750px;
+    padding-top: 80px;
+    padding-bottom: 70px;
     background-color: #fbfbfd;
   }
 
@@ -181,7 +184,7 @@
 /* Large Screen (Laptops, Desktop monitors) */
 @media screen and (min-width: 1200px) {
   .aboutHeaderContainer {
-    height: 300px;
+    height: 280px;
     overflow-x: hidden;
     background-color: #3d4e96; /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
@@ -192,7 +195,7 @@
     font-size: 34px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    /* top: 45px; */
     text-align: center;
   }
 
@@ -203,7 +206,8 @@
   }
 
   #TeamContainer {
-    height: 750px;
+    padding-top: 80px;
+    padding-bottom: 70px;
     background-color: #fbfbfd;
   }
 
@@ -242,10 +246,17 @@
 }
 
 #MissionContainer {
-  height: 310px;
+  padding-top: 80px;
+  padding-bottom: 50px;
   background-color: #fbfbfd;
 }
 
 img.aboutPage-images:hover {
   filter: none;
+}
+
+#HowItWorksContainer {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  background-color: #fbfbfd;
 }

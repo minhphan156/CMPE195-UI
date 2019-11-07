@@ -27,20 +27,15 @@ export default withAuth(
             justify="flex-start"
           >
             <Grid id="SecurityManifestoTitle" item xs={9} lg={5}>
-              Storage
+              Access
             </Grid>
-
             <Grid id="SecurityManifestoText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat Lorem ipsum dolor.
+              We require access control to both the client UI and the backend
+              APIs in order to only allow logged in, authorized users access to
+              your data. SURD uses a single identity provider, Okta. Okta is a
+              world leader for authentication services.
             </Grid>
           </Grid>
-
-          {/* /// */}
           <Grid
             container
             spacing={0}
@@ -50,19 +45,16 @@ export default withAuth(
             justify="flex-start"
           >
             <Grid id="SecurityManifestoTitle" item xs={9} lg={5}>
-              Access
+              At Rest
             </Grid>
             <Grid id="SecurityManifestoText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat Lorem ipsum dolor.
+              All notebooks (original and rendered), as well as any images are
+              stored in AWS S3 buckets. All your data and metadata is encrypted
+              at rest using an industry-standard AES-256 encryption algorithm.
+              Encryption and decryption is handled automatically and
+              transparently.
             </Grid>
           </Grid>
-          {/* /// */}
-
           <Grid
             container
             spacing={0}
@@ -72,15 +64,19 @@ export default withAuth(
             justify="flex-start"
           >
             <Grid id="SecurityManifestoTitle" item xs={9} lg={5}>
-              Infrastructure{" "}
+              In Transit
             </Grid>
             <Grid id="SecurityManifestoText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet, consectetuer adipiscing
-              elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              magna aliquam erat volutpat Lorem ipsum dolor.
+              Our services live on the cloud and we use HTTPS protocol for them
+              to securely communicate to one another. HTTPS uses an encryption
+              protocol to encrypt communications. The protocol is called
+              Transport Layer Security (TLS). This type of security system uses
+              two different keys to encrypt communications between 2 parties;
+              The private key is controlled by the owner of a website. It is
+              used to decrypt information encrypted by the public key. The
+              public key which is available to everyone who wants to talk to the
+              server securely. The information can only be decrypted by the
+              private key.
             </Grid>
           </Grid>
         </div>

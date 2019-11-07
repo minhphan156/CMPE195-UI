@@ -47,8 +47,9 @@ export default withAuth(
                   md={6}
                   lg={6}
                 >
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt
+                  SURD is a university-oriented software that enables users
+                  within a college to securely share technical research and
+                  streamline accessibility to other researchers.
                 </Grid>
               </Grid>
 

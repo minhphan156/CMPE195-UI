@@ -33,7 +33,7 @@ export default class Login extends Component {
       logo: "logo_white.png",
       i18n: {
         en: {
-          "primaryauth.title": "Sign in to SERD"
+          "primaryauth.title": "Sign in to SURD"
         }
       },
       authParams: {

@@ -36,9 +36,9 @@ export default withAuth(
             </Grid>
             <Grid id="ContainerTwoText" row xs={9} sm={7} md={5} lg={4}>
               We are committed to protect your data and privacy. Your research
-              belongs to you. Not us, not anyone.
+              belongs to you, and only you.
               <br />
-              <Link to="learn-more" className="ContainerTwoLink">
+              <Link to="security-manifesto" className="ContainerTwoLink">
                 Learn more how we handle your data.
               </Link>
             </Grid>
