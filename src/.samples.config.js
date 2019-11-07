@@ -1,7 +1,7 @@
 export default {
   oidc: {
-    clientId: "0oajhqmtlzhEYBliP0h7",
-    issuer: "https://dev-489491.oktapreview.com/oauth2/default",
+    clientId: "0oa1rdkuoj3YELLJL357",
+    issuer: "https://dev-696434.okta.com/oauth2/default",
     redirectUri: "http://localhost:8080/implicit/callback",
     scope: "openid profile email"
   },
