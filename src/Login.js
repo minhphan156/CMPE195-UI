@@ -9,6 +9,7 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
+import ReactDOM from "react-dom";
 
 import React, { Component } from "react";
 import * as OktaSignIn from "@okta/okta-signin-widget";
@@ -17,20 +18,14 @@ import "@okta/okta-signin-widget/dist/css/okta-theme.css";
 
 import config from "./.samples.config";
 
-/////// CALL IT LoginPage !!!
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.signIn = new OktaSignIn({
-      /**
-       * Note: when using the Sign-In Widget for an OIDC flow, it still
-       * needs to be configured with the base URL for your Okta Org. Here
-       * we derive it from the given issuer for convenience.
-       */
+export default class LoginPage extends Component {
+  componentDidMount() {
+    const el = ReactDOM.findDOMNode(this);
+    this.widget = new OktaSignIn({
       baseUrl: config.oidc.issuer.split("/oauth2")[0],
       clientId: config.oidc.clientId,
       redirectUri: config.oidc.redirectUri,
-      logo: "logo_white.png",
+      logo: "logo_blue.png",
       i18n: {
         en: {
           "primaryauth.title": "Sign in to SURD"
@@ -43,27 +38,14 @@ export default class Login extends Component {
         scopes: config.oidc.scope.split(" ")
       }
     });
+    this.widget.renderEl({ el }, this.props.onSuccess, this.props.onError);
   }
-  componentDidMount() {
-    this.signIn.renderEl(
-      { el: "#sign-in-widget" },
-      () => {
-        /**
-         * In this flow, the success handler will not be called beacuse we redirect
-         * to the Okta org for the authentication workflow.
-         */
-      },
-      err => {
-        throw err;
-      }
-    );
+
+  componentWillUnmount() {
+    this.widget.remove();
   }
+
   render() {
-    return (
-      <div id="LoginPage">
-        <br /> <br /> <br />
-        <div id="sign-in-widget" />
-      </div>
-    );
+    return <div id="LoginPage" />;
   }
 }

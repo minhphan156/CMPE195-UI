@@ -23,10 +23,10 @@ import TermsOfService from "./components/public_pages/terms_of_service_page/Term
 // import SignIn from "./components/public_pages/signin_page/SignInPage";
 import AccessToken from "./components/dev/AccessToken";
 
-import Login from "./Login";
+import LoginPage from "./Login";
 import Post from "./components/post/Post";
 import Upload from "./components/upload/Upload";
-import Preview from "./components/post/PreviewOfPost";	
+import Preview from "./components/post/PreviewOfPost";
 import Explore from "./components/explore/Explore";
 
 function customAuthHandler({ history }) {
@@ -67,8 +67,8 @@ class App extends Component {
                 <Route exact path="/upload" component={Upload} />
                 <Route exact path="/post" component={Post} />
                 <Route exact path="/explore" component={Explore} />
-                <Route exact path="/preview" component={Preview} />	
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/preview" component={Preview} />
+                <Route exact path="/login" component={LoginPage} />
               </Switch>
 
               <Route path="/implicit/callback" component={ImplicitCallback} />

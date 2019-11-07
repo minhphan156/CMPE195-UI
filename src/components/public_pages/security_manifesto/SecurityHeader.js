@@ -20,7 +20,7 @@ export default withAuth(
 
     render() {
       return (
-        <div className="securityHeaderContainer ">
+        <div className="aboutHeaderContainer ">
           <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
             <div className="headerfont">
               <Grid
@@ -30,7 +30,7 @@ export default withAuth(
                 alignItems="center"
               >
                 <Grid
-                  className="securityHeaderTitle"
+                  className="AboutHeaderTitle"
                   item
                   xs={12}
                   sm={8}
@@ -40,7 +40,7 @@ export default withAuth(
                   Security Manifesto
                 </Grid>
                 <Grid
-                  className="securityHeaderText"
+                  className="AboutHeaderText"
                   item
                   xs={12}
                   sm={7}

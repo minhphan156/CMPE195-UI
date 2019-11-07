@@ -27,8 +27,6 @@ export default withAuth(
     };
 
     async login() {
-      window.location.reload();
-
       this.setState({ anchorEl: null });
       this.props.auth.login("/");
     }

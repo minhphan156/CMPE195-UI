@@ -4,6 +4,8 @@ import { checkAuthentication } from "../../../helpers/checkAuthHelper";
 import "../styles_for_components/LandingPage.css";
 import { withAuth } from "@okta/okta-react";
 import JupLogo2 from "../../../assets/Jupyter_logo.png";
+import Security from "../../../assets/security.png";
+import Insights from "../../../assets/insights.png";
 
 export default withAuth(
   class ServiceOverview extends Component {
@@ -37,16 +39,16 @@ export default withAuth(
             </Grid>
 
             <Grid id="ServiceOverviewContainerText" item xs={7} sm={2} lg={2}>
-              <img className="landing-images" src={JupLogo2} alt="" />
+              <img className="landing-images" src={Security} alt="" />
               <br />
               <br />
               Rest assured, your data is secure
             </Grid>
 
             <Grid id="ServiceOverviewContainerText" item xs={7} sm={2} lg={2}>
-              <img className="landing-images" src={JupLogo2} alt="" />
+              <img className="landing-images" src={Insights} alt="" />
               <br /> <br />
-              Find new insights, more efficiently
+              Discover new insights, more efficiently
             </Grid>
           </Grid>
         </div>
