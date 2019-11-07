@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";	
 
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
@@ -199,18 +200,20 @@ class Upload extends Component {
           />
           {upload ? (
             <div style={{ width: 350 }}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                style={{
-                  marginTop: 10,
-                  width: 300,
-                  marginBottom: 15
-                }}
-              >
-                Preview
-              </Button>
+              <Link to="/preview" className="navbarMenuButtons">	
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    marginTop: 10,
+                    width: 300,
+                    marginBottom: 15
+                  }}
+                >
+                  Preview
+                </Button>
+              </Link>	
               <Done
                 style={{ color: "green", marginLeft: 5, marginBottom: -6 }}
               />
