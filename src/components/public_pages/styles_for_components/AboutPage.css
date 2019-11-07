@@ -1,0 +1,251 @@
+/* X-Small Screen */
+@media screen and (max-width: 600px) {
+  .aboutHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #AboutContainerTitle {
+    color: #3d4e96;
+    font-size: 23px;
+    font-weight: 900;
+    position: relative;
+    top: 30px;
+    text-align: center;
+  }
+
+  #AboutContainerText {
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    text-align: center;
+  }
+
+  #TeamContainer {
+    height: 750px;
+    background-color: #fbfbfd;
+  }
+
+  img.aboutPage-images {
+    position: relative;
+    width: 130px;
+    filter: grayscale(100%);
+  }
+
+  #AboutPageNames {
+    font-size: 15px;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+  }
+
+  .AboutHeaderTitle {
+    display: none;
+  }
+
+  .AboutHeaderTitleSmall {
+    font-size: 26px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .AboutHeaderText {
+    display: none;
+  }
+}
+
+/* Small Screen */
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  .aboutHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #AboutContainerTitle {
+    color: #3d4e96;
+    font-size: 29px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    text-align: center;
+  }
+
+  #AboutContainerText {
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    top: 10px;
+  }
+
+  #TeamContainer {
+    height: 650px;
+    background-color: #fbfbfd;
+  }
+
+  img.aboutPage-images {
+    position: relative;
+    width: 150px;
+    filter: grayscale(100%);
+  }
+
+  #AboutPageNames {
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+  }
+
+  .AboutHeaderTitle {
+    font-size: 30px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .AboutHeaderText {
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .AboutHeaderTitleSmall {
+    display: none;
+  }
+}
+
+/* Medium Screen (Landscape Phones, Tablets) */
+@media screen and (min-width: 960px) and (max-width: 1200px) {
+  .aboutHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #AboutContainerTitle {
+    color: #3d4e96;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    text-align: center;
+  }
+
+  #AboutContainerText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+  }
+
+  #TeamContainer {
+    height: 750px;
+    background-color: #fbfbfd;
+  }
+
+  img.aboutPage-images {
+    position: relative;
+    width: 200px;
+    filter: grayscale(100%);
+  }
+
+  #AboutPageNames {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+  }
+
+  .AboutHeaderTitle {
+    font-size: 33px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .AboutHeaderText {
+    font-size: 22px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .AboutHeaderTitleSmall {
+    display: none;
+  }
+}
+
+/* Large Screen (Laptops, Desktop monitors) */
+@media screen and (min-width: 1200px) {
+  .aboutHeaderContainer {
+    height: 300px;
+    overflow-x: hidden;
+    background-color: #3d4e96; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, #3d4e96, #3d4e96, #2c76a9);
+  }
+
+  #AboutContainerTitle {
+    color: #3d4e96;
+    font-size: 34px;
+    font-weight: 900;
+    position: relative;
+    top: 45px;
+    text-align: center;
+  }
+
+  #AboutContainerText {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+  }
+
+  #TeamContainer {
+    height: 750px;
+    background-color: #fbfbfd;
+  }
+
+  img.aboutPage-images {
+    position: relative;
+    width: 200px;
+    filter: grayscale(100%);
+  }
+
+  #AboutPageNames {
+    font-size: 22px;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+  }
+
+  .AboutHeaderTitle {
+    font-size: 33px;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .AboutHeaderText {
+    font-size: 23px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .AboutHeaderTitleSmall {
+    display: none;
+  }
+}
+
+#AboutManifestoPageBody {
+  overflow-x: hidden;
+}
+
+#MissionContainer {
+  height: 310px;
+  background-color: #fbfbfd;
+}
+
+img.aboutPage-images:hover {
+  filter: none;
+}
