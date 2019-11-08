@@ -18,5 +18,6 @@ code {
 }
 
 #LoginPage {
-  height: 600px;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }

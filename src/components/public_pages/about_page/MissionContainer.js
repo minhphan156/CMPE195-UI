@@ -27,14 +27,15 @@ export default withAuth(
             justify="center"
           >
             <Grid id="AboutContainerTitle" item xs={12} lg={12}>
-              Our Mission
+              Our Mission <br /> <br />
             </Grid>
 
             <Grid id="AboutContainerText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet.
+              It is our goal to simplify the knowledge sharing process among
+              researchers and data scientists. By making it as simple as
+              possible to share data and gathered insights with colleagues, we
+              want to drive a culture of collaboration and teamwork at
+              universities all around the world.
             </Grid>
           </Grid>
         </div>

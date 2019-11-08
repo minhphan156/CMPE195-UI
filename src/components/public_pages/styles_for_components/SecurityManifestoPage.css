@@ -12,7 +12,7 @@
     font-size: 23px;
     font-weight: 900;
     position: relative;
-    top: 30px;
+    margin-bottom: 12px;
     left: 30px;
   }
 
@@ -33,19 +33,21 @@
   }
 
   #SecurityContainerOne {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #ececf2;
   }
   #SecurityContainerTwo {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #f6f6fa;
   }
   #SecurityContainerThree {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #fbfbfd;
   }
   #SecurityContainerAll {
-    height: 930px;
     background-color: #fbfbfd;
   }
 }
@@ -64,7 +66,7 @@
     font-size: 29px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    margin-bottom: 16px;
     left: 100px;
   }
 
@@ -73,7 +75,6 @@
     font-weight: 300;
     color: black;
     position: relative;
-    top: 10px;
     left: 100px;
   }
 
@@ -90,19 +91,21 @@
   }
 
   #SecurityContainerOne {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #ececf2;
   }
   #SecurityContainerTwo {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #f6f6fa;
   }
   #SecurityContainerThree {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #fbfbfd;
   }
   #SecurityContainerAll {
-    height: 930px;
     background-color: #fbfbfd;
   }
 }
@@ -121,7 +124,7 @@
     font-size: 34px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    margin-bottom: 18px;
     left: 15%;
   }
 
@@ -146,19 +149,21 @@
   }
 
   #SecurityContainerOne {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #ececf2;
   }
   #SecurityContainerTwo {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #f6f6fa;
   }
   #SecurityContainerThree {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #fbfbfd;
   }
   #SecurityContainerAll {
-    height: 930px;
     background-color: #fbfbfd;
   }
 }
@@ -177,7 +182,7 @@
     font-size: 34px;
     font-weight: 900;
     position: relative;
-    top: 45px;
+    margin-bottom: 20px;
     left: 15%;
   }
 
@@ -202,19 +207,21 @@
   }
 
   #SecurityContainerOne {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #ececf2;
   }
   #SecurityContainerTwo {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #f6f6fa;
   }
   #SecurityContainerThree {
-    height: 310px;
+    padding-top: 60px;
+    padding-bottom: 50px;
     background-color: #fbfbfd;
   }
   #SecurityContainerAll {
-    height: 930px;
     background-color: #fbfbfd;
   }
 }

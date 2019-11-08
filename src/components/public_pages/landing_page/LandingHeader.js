@@ -43,26 +43,11 @@ export default withAuth(
                 alignItems="baseline"
               >
                 <Grid className="headerTitle" item xs={12} sm={7} md={6} lg={6}>
-                  The Knowledge Platform
+                  Secure University Research Distribution
                 </Grid>
                 <Grid className="headerText" item xs={12} sm={4} md={4} lg={4}>
-                  We empower researchers and data scientists at large
-                  organizations to share their proprietary research at scale.
-                </Grid>
-
-                <Grid
-                  className="buttonRedContainer"
-                  item
-                  xs={12}
-                  sm={4}
-                  md={4}
-                  lg={5}
-                >
-                  <Link to="/early-access">
-                    <Button class="button buttonRed">
-                      Request Early Access
-                    </Button>
-                  </Link>
+                  We empower researchers and data scientists at universities to
+                  share their proprietary research at scale.
                 </Grid>
               </Grid>
 
@@ -84,7 +69,7 @@ export default withAuth(
                   md={6}
                   lg={6}
                 >
-                  The Knowledge Platform
+                  Secure University Research Distribution
                 </Grid>
                 <Grid
                   className="headerTextSmall"
@@ -94,23 +79,8 @@ export default withAuth(
                   md={4}
                   lg={4}
                 >
-                  We empower researchers and data scientists at large
-                  organizations to share their proprietary research at scale.
-                </Grid>
-
-                <Grid
-                  className="buttonRedContainer"
-                  item
-                  xs={8}
-                  sm={4}
-                  md={4}
-                  lg={5}
-                >
-                  <Link to="/early-access">
-                    <Button class="button buttonRedSmall">
-                      Request Early Access
-                    </Button>
-                  </Link>
+                  We empower researchers and data scientists at universities to
+                  share their proprietary research at scale.
                 </Grid>
               </Grid>
             </div>

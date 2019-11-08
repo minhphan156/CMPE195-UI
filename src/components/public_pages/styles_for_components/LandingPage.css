@@ -15,7 +15,7 @@
   }
 
   img.landing-images {
-    width: 55%;
+    height: 55%;
   }
 
   #ContainerTwoTitle {
@@ -164,8 +164,7 @@
   }
 
   img.landing-images {
-    width: 65%;
-    height: auto;
+    height: 27%;
   }
 
   #ContainerTwoTitle {

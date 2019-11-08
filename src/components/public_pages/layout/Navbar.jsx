@@ -124,8 +124,6 @@ class Navbar extends Component {
   }
 
   async login() {
-    window.location.reload();
-
     this.props.auth.login("/");
   }
 

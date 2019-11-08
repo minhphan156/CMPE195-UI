@@ -14,11 +14,6 @@ export default () => {
             </Link>
           </Grid>
           <Grid className="footerLayout" item>
-            <Link to="/contact-us" className="headerMenuLink">
-              Contact Us
-            </Link>
-          </Grid>
-          <Grid className="footerLayout" item>
             <Link to="/terms-of-service" className="headerMenuLink">
               Terms of Service
             </Link>
@@ -26,7 +21,7 @@ export default () => {
         </Grid>
       </Grid>
       <Grid container spacing={0} className="footerLayout" justify="center">
-        © OUR Technologies Inc. {new Date().getFullYear()}
+        © SURD Technologies {new Date().getFullYear()}
       </Grid>
     </footer>
   );

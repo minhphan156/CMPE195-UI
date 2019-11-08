@@ -20,21 +20,30 @@ export default withAuth(
         <div>
           <Grid
             container
-            id="MissionContainer"
+            id="HowItWorksContainer"
             spacing={0}
             alignItems="flex-start"
             direction="row"
             justify="center"
           >
-            <Grid id="AboutContainerTitle" item xs={12} lg={12}>
-              How it works...
-            </Grid>
-
             <Grid id="AboutContainerText" item xs={9} lg={9}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-              erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
-              tation ul. Lorem ipsum dolor sit amet.
+              Research is the lifeblood of technological and scientific
+              progress, lying at the core of many universities’ mission
+              statements. Data analytics and visualization are quickly becoming
+              a large part of this multidisciplinary research as focus shifts to
+              extracting knowledge from vast amounts of data. University
+              researchers in all fields of science, business, math, and
+              humanities are contributing to the mission of finding signals in
+              the expanse of collected data and eventually hoping to produce
+              insights that could be game-changing.
+              <br></br>
+              <br></br>
+              SURD allows uploading of research domain documents (IPYNB),
+              displays findings in plain text alongside easy-to-view graphs, and
+              permits users to search through troves of research with ease. All
+              of this occurs while the university findings are being stored
+              securely, and only accessible for viewing to authorized members of
+              the organization until clearance for release.
             </Grid>
           </Grid>
         </div>
