@@ -9,6 +9,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import InsertLink from "@material-ui/icons/InsertLink";
+import { uploadNotebookFinal } from "../../actions/uploadActions";
+import { withAuth } from '@okta/okta-react';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,6 +35,11 @@ const styles = theme => ({
 });
 
 class Post extends Component {
+  handlePublish = () => {
+    this.props.auth.getAccessToken().then(token => {
+      this.props.uploadNotebookFinal(this.props.history, token);
+    }).catch(err => console.log(err));
+  }
   render() {
     const { classes } = this.props;
     const { upload } = this.props.upload;
@@ -73,7 +80,7 @@ class Post extends Component {
                   </Grid>
                   <Grid item>
                     <Link to="Post">
-                      <Button class="publishbutton">Publish</Button>
+                      <Button onClick ={this.handlePublish} class="publishbutton">Publish</Button>
                     </Link>
                   </Grid>
                 </Grid>
@@ -146,6 +153,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    {}
-  )(Post)
+    {uploadNotebookFinal}
+  )(withAuth(Post))
 );
