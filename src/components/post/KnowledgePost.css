@@ -1,101 +1,102 @@
 .infoPaper {
-    margin: 30px;
-    width: 83%;
-    font-size: 20px;
-    padding-top: 25px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 40px;
-  }
-  
-  .notebookPaper {
-    width: 83%;
-    padding-top: 25px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 20px;
-    /* font-family: inherit !important; */
-  }
-  
-  .KnowledgePostTitle {
-    color: #3d4e96;
-    font-size: 34px;
-    font-weight: 900;
-    position: relative;
-  }
-  
-  .KnowledgePostAuthor {
-    font-size: 22px;
-    font-weight: 500;
-    color: #f1615d;
-  }
-  
-  .KnowledgePostTime {
-    font-size: 18px;
-    font-weight: 300;
-    color: darkgrey;
-  }
-  
-  .KnowledgePostText {
-    font-size: 18px;
-    font-weight: 300;
-    color: black;
-  }
-  
-  .KnowledgePostSummary {
-    font-size: 16px;
-    font-weight: 300;
-    color: black;
-    left: 100px;
-  }
-  
-  .DataSetButton {
-    font-size: 18px;
-    font-weight: 300;
-    color: black;
-    text-decoration: none;
-    top: 10px;
-    right: 2px;
-    position: relative;
-  }
-  
-  .PostButtons {
-    text-decoration: none;
-    margin: 2px;
-  }
-  
-  .DataSetButton:hover {
-    font-size: 18px;
-    font-weight: 300;
-    color: black;
-    text-decoration: none;
-    border-bottom: 0px;
-  }
-  
-  .publishbutton {
-    background-color: #f1615d;
-    color: white;
-    width: 160px;
-    border: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 700;
-    height: 38px;
-    border-radius: 10px;
-  }
-  
-  #notebook-container {
-    padding: 0px !important;
-    background-color: white !important;
-    min-height: 0 !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-  }
-  
-  .VisibilityIcon {
-    left: 20px;
-    size: 200%;
-    width: 183%;
-    font-size: 20;
-  }
+  margin: 30px;
+  width: 83%;
+  font-size: 20px;
+  padding-top: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+}
+
+.notebookPaper {
+  width: 83%;
+  padding-top: 25px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  /* font-family: inherit !important; */
+}
+
+.KnowledgePostTitle {
+  color: #3d4e96;
+  font-size: 34px;
+  font-weight: 900;
+  position: relative;
+}
+
+.KnowledgePostAuthor {
+  font-size: 22px;
+  font-weight: 500;
+  color: #f1615d;
+}
+
+.KnowledgePostTime {
+  font-size: 18px;
+  font-weight: 300;
+  color: darkgrey;
+}
+
+.KnowledgePostText {
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+}
+
+.KnowledgePostSummary {
+  font-size: 16px;
+  font-weight: 300;
+  color: black;
+  left: 100px;
+}
+
+.DataSetButton {
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+  text-decoration: none;
+  top: 10px;
+  right: 2px;
+  position: relative;
+}
+
+.PostButtons {
+  text-decoration: none;
+  margin: 2px;
+}
+
+.DataSetButton:hover {
+  font-size: 18px;
+  font-weight: 300;
+  color: black;
+  text-decoration: none;
+  border-bottom: 0px;
+}
+
+.publishbutton {
+  background-color: #f1615d;
+  color: white;
+  width: 160px;
+  border: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  height: 38px;
+  border-radius: 10px;
+}
+
+#notebook-container {
+  padding: 0px !important;
+  background-color: white !important;
+  min-height: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  width: 100%;
+}
+
+.VisibilityIcon {
+  left: 20px;
+  size: 200%;
+  width: 183%;
+  font-size: 20;
+}

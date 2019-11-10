@@ -161,37 +161,37 @@ class Navbar extends Component {
 
     var fableHeader = document.getElementById("fableHeader");
 
-    if (window.location.pathname !== "/upload") {
-      makePostButton = (
-        <Link to="/upload">
-          <Button class="buttonAuth buttonGreyAuth" primary>
-            Make a Post
-          </Button>
-        </Link>
-      );
+    // if (window.location.pathname !== "/upload") {
+    makePostButton = (
+      <Link to="/upload">
+        <Button class="buttonAuth buttonGreyAuth" primary>
+          Make a Post
+        </Button>
+      </Link>
+    );
 
-      searchBar = (
-        <form onSubmit={this.onSearchClick}>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              onChange={this.handleChangeSearch}
-              value={this.state.search}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-            />
+    searchBar = (
+      <form onSubmit={this.onSearchClick}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
           </div>
-        </form>
-      );
-    } else {
-      makePostButton = null;
-      searchBar = null;
-    }
+          <InputBase
+            placeholder="Search…"
+            onChange={this.handleChangeSearch}
+            value={this.state.search}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput
+            }}
+          />
+        </div>
+      </form>
+    );
+    // } else {
+    //   makePostButton = null;
+    //   searchBar = null;
+    // }
 
     if (this.state.authenticated !== null) {
       if (this.state.authenticated) {
