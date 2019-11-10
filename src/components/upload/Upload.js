@@ -7,7 +7,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import { Button, TextField, Typography } from "@material-ui/core";
-import { uploadNotebook } from "../../actions/uploadActions";
+import { uploadNotebookDraft } from "../../actions/uploadActions";
 import ChipInput from "material-ui-chip-input";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import moment from "moment";
@@ -77,7 +77,7 @@ class Upload extends Component {
     this.setState({ isSubmit: true });
 
     this.props.auth.getAccessToken().then(token => {
-      this.props.uploadNotebook(uploadData, this.props.history, token);
+      this.props.uploadNotebookDraft(uploadData, this.props.history, token);
     }).catch(err => console.log(err));
   }
 
@@ -263,5 +263,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { uploadNotebook }
+  { uploadNotebookDraft }
 )(withAuth(Upload));

@@ -127,7 +127,9 @@ class Post extends Component {
               <Grid container justify="space-between" alignItems="flex-start">
                 <Grid className="KnowledgePostText" item>
                   {upload.metadata.authors}
-                  <div className="KnowledgePostTime">DAY, DATE, TIME</div>
+                  <div className="KnowledgePostTime">
+                  {upload.metadata.time}
+                  </div>
                 </Grid>
               </Grid>
 

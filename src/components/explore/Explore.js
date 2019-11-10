@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Grow, Grid, Typography } from "@material-ui/core";
 import ExploreCard from "./ExploreCard";
-import ExploreCardGridView from "./ExploreCardGridView";
 import FilterResult from "./FilterResult";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import { connect } from "react-redux";
 import { getPostsActions } from "../../actions/getPostsActions";
 import { withAuth } from "@okta/okta-react";
 import MDSpinner from "react-md-spinner";
 import moment from "moment";
 import Sort from "@material-ui/icons/Sort"; //sorting icon
+import { Button } from "semantic-ui-react";
 
 const styles = {
   FilterButtonGroup: {
@@ -24,7 +22,7 @@ const styles = {
   ToggleButtonGroupContainerListView: {
     width: "fit-content",
     borderRadius: 17,
-    marginLeft: 430,
+    marginLeft: 530,
     marginBottom: 5
   },
   ToggleButtonGroupContainerGridView: {
@@ -69,11 +67,13 @@ const styles = {
   SortBar: {
     display: "flex",
     marginTop: 17,
-    marginLeft: 651,
+    marginLeft: 520,
     color: "#F0605C"
   },
   SortBarText: {
-    fontSize: 15
+    fontSize: 15,
+    height: 0,
+    margin: 0
   },
   RenderCardGridViewSpacing: {
     marginLeft: 110
@@ -83,8 +83,8 @@ class Explore extends Component {
   constructor() {
     super();
     this.state = {
+      descendingSort: true,
       listView: true,
-      gridView: false,
       alignment: "" //state to handle group button click highlight
     };
     this.handleAlignment = this.handleAlignment.bind(this);
@@ -93,12 +93,12 @@ class Explore extends Component {
   }
 
   componentDidMount() {
-    // this.props.auth
-    //   .getAccessToken()
-    //   .then(token => {
-    //     this.props.getPostsActions(token);
-    //   })
-    //   .catch(err => console.log(err));
+    this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.getPostsActions(token);
+      })
+      .catch(err => console.log(err));
   }
 
   //this handle the highlight of button group
@@ -120,32 +120,35 @@ class Explore extends Component {
     });
   }
 
+
+  handleSort = () => {
+    if(this.state.descendingSort){
+      this.props.posts.posts.sort(function(a,b){
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+      this.setState({
+        descendingSort: false
+      })
+    } else{
+      this.props.posts.posts.sort(function(a,b){
+        return new Date(a.created_at) - new Date(b.created_at);
+      });
+      this.setState({
+        descendingSort: true
+      })
+    }
+  }
+
   render() {
     const { classes } = this.props;
-    const { alignment } = this.state;
     const { posts } = this.props.posts;
 
-    console.log("explore component posts ", posts);
+    // console.log("explore component posts ", posts);
 
     if (posts.length > 1) {
       const renderCardListView = posts.map(post => (
         <Grid item xs={8}>
           <ExploreCard
-            hash_id={post.hash_id}
-            title={post.title}
-            summary={post.summary}
-            views={post.views}
-            create_at={moment(post.created_at).format("MMMM DD, YYYY hh:mm:ss")}
-            tags={post.tags}
-            preview_img={post.preview_img}
-            authors={post.authors}
-          />
-        </Grid>
-      ));
-
-      const renderCardGridView = posts.map(post => (
-        <Grid item xs={6}>
-          <ExploreCardGridView
             hash_id={post.hash_id}
             title={post.title}
             summary={post.summary}
@@ -166,107 +169,29 @@ class Explore extends Component {
             justify="center"
             style={{ marginTop: 87 }}
           >
-            {this.state.listView && (
-              <Grid item xs={12} className={classes.SortBarContainerListView}>
-                <ToggleButtonGroup
-                  value={alignment}
-                  exclusive
-                  selected
-                  onChange={this.handleAlignment}
-                  className={classes.ToggleButtonGroupContainerListView}
-                >
-                  <ToggleButton
-                    classes={{ selected: classes.selectedButton }}
-                    className={classes.FilterButtonGroup}
-                    value="left"
-                    onClick={this.changeToListView}
-                  >
-                    List view
-                  </ToggleButton>
-
-                  <ToggleButton
-                    classes={{ selected: classes.selectedButton }}
-                    className={classes.FilterButtonGroup}
-                    value="right"
-                    onClick={this.changeToGridView}
-                  >
-                    Grid view
-                  </ToggleButton>
-                </ToggleButtonGroup>
-
-                <div className={classes.SortBar}>
-                  <Typography className={classes.SortBarText}>
-                    Sort:{" "}
-                  </Typography>
-                  <Sort />
-                </div>
-              </Grid>
-            )}
-
-            {this.state.gridView && (
-              <Grid item xs={12} className={classes.SortBarContainerGridView}>
-                <ToggleButtonGroup
-                  value={alignment}
-                  exclusive
-                  selected
-                  onChange={this.handleAlignment}
-                  className={classes.ToggleButtonGroupContainerListView}
-                >
-                  <ToggleButton
-                    classes={{ selected: classes.selectedButton }}
-                    className={classes.FilterButtonGroup}
-                    value="left"
-                    onClick={this.changeToListView}
-                  >
-                    List view
-                  </ToggleButton>
-
-                  <ToggleButton
-                    classes={{ selected: classes.selectedButton }}
-                    className={classes.FilterButtonGroup}
-                    value="right"
-                    onClick={this.changeToGridView}
-                  >
-                    Grid view
-                  </ToggleButton>
-                </ToggleButtonGroup>
-              </Grid>
-            )}
-
-            {this.state.listView && (
               <Grid item xs={3} className={classes.FilterResultContainer}>
                 <FilterResult />
               </Grid>
-            )}
-            {this.state.listView && (
-              <div>
+
+               <Grid item xs={12} className={classes.SortBarContainerListView}>
+                <div className={classes.SortBar}>
+                  <Button onClick={this.handleSort} className={classes.SortBarText}>
+                    Sort {this.state.descendingSort ? 'Latest' : 'Earliest'}
+                  </Button>
+                  <Sort />
+                </div>
+              </Grid>
                 <Grid item xs={8}>
                   <Grow
                     in={this.state.listView}
                     style={{ transformOrigin: "0 0 0" }}
                     {...(this.state.listView ? { timeout: 1300 } : {})}
                   >
-                    <div>{renderCardListView}</div>
+                    <div>
+                    {renderCardListView}
+                    </div>
                   </Grow>
-                </Grid>
-              </div>
-            )}
-
-            {this.state.gridView && (
-              <Grow
-                in={this.state.gridView}
-                style={{ transformOrigin: "0 0 0" }}
-                {...(this.state.gridView ? { timeout: 1300 } : {})}
-              >
-                <Grid
-                  container
-                  spacing={8}
-                  className={classes.RenderCardGridViewSpacing}
-                >
-                  {renderCardGridView}
-                </Grid>
-              </Grow>
-            )}
+                </Grid>           
           </Grid>
         </div>
       );
