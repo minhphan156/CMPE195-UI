@@ -112,7 +112,7 @@ class FilterResult extends Component {
     const filterQuery = {
       tags: this.state.tags,
       startDate: this.state.startDate ? new Date(this.state.startDate).toISOString() : null,
-      endDate: this.state.endDate ? new Date(this.state.endDate).toISOString() : null,
+      endDate: this.state.endDate ? new Date(this.state.endDate + ' 23:00:00').toISOString() : null,
     }
     
     this.props.auth

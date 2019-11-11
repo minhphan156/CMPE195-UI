@@ -67,6 +67,7 @@ export const getFilteredPostsActions = (filterQuery,accessToken) => dispatch => 
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack,
   }
+  console.log('getFilteredPostsActions-',searchPack)
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
