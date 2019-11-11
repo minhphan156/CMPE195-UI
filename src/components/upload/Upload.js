@@ -44,26 +44,33 @@ class Upload extends Component {
     this.checkForm = this.checkForm.bind(this);
   }
 
+  async componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   // update the component state of TextField
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    this.checkForm();
+    this.setState({ [e.target.name]: e.target.value }, this.checkForm);
   }
 
   // add hashtags
   handleAddTags(tags) {
-    this.setState({
-      tags: [...this.state.tags, tags]
-    });
-    this.checkForm();
+    this.setState(
+      {
+        tags: [...this.state.tags, tags]
+      },
+      this.checkForm
+    );
   }
 
   // delete hashtags
   handleDeleteTags(deletedTags) {
-    this.setState({
-      tags: this.state.tags.filter(tag => tag !== deletedTags)
-    });
-    this.checkForm();
+    this.setState(
+      {
+        tags: this.state.tags.filter(tag => tag !== deletedTags)
+      },
+      this.checkForm
+    );
   }
 
   onSubmit(e) {
@@ -93,20 +100,13 @@ class Upload extends Component {
   }
 
   checkForm() {
-    // title: "",
-    // authors: [],
-    // time: "",
-    // tags: [],
-    // summary: "",
-    // dataset: [],
-    // notebook: null,
-
     if (
       this.state.title != "" &&
       this.state.authors.length != 0 &&
       this.state.tags.length != 0 &&
       this.state.summary != "" &&
-      this.state.notebook != null
+      this.state.notebook != null &&
+      this.state.notebook.length != 0
     ) {
       this.setState({ isFilledOut: true });
     } else {
@@ -224,10 +224,12 @@ class Upload extends Component {
             maxFiles={1}
             oninit={() => this.handleInit()}
             onupdatefiles={fileItems => {
-              this.setState({
-                notebook: fileItems.map(fileItem => fileItem.file)
-              });
-              this.checkForm();
+              this.setState(
+                {
+                  notebook: fileItems.map(fileItem => fileItem.file)
+                },
+                this.checkForm
+              );
             }}
           />
           {upload ? (
@@ -263,7 +265,7 @@ class Upload extends Component {
               </Button>
               <MDSpinner style={{ marginLeft: 5 }} />
             </div>
-          ) : this.state.isFilledOut ? (
+          ) : this.state.isFilledOut && this.state.notebook ? (
             <Button
               type="submit"
               variant="contained"
