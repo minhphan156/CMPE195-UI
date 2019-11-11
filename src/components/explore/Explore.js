@@ -145,6 +145,12 @@ class Explore extends Component {
 
     if (isNotFound ){
       alert("We can not find the posts you are looking for")
+      this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.getPostsActions(token);
+      })
+      .catch(err => console.log(err));
     }
     if (posts.length >= 1) {
       const renderCardListView = posts.map(post => (
