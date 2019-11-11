@@ -141,11 +141,12 @@ class Explore extends Component {
 
   render() {
     const { classes } = this.props;
-    const { posts } = this.props.posts;
+    const { posts, isNotFound } = this.props.posts;
 
-    // console.log("explore component posts ", posts);
-
-    if (posts.length > 1) {
+    if (isNotFound ){
+      alert("We can not find the posts you are looking for")
+    }
+    if (posts.length >= 1) {
       const renderCardListView = posts.map(post => (
         <Grid item xs={8}>
           <ExploreCard
@@ -215,7 +216,7 @@ class Explore extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts,
 });
 
 export default connect(

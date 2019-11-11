@@ -7,11 +7,14 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import moment from "@date-io/moment";
 import ChipInput from "material-ui-chip-input";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { connect } from "react-redux";
+import { withAuth } from "@okta/okta-react";
+import { getFilteredPostsActions } from "../../actions/getPostsActions";
 
 const styles = {
   FilterContainer: {
     width: 240,
-    height: 447,
+    paddingBottom: 10,
     position: "fixed"
   },
   FilterHeaderContainer: {
@@ -75,12 +78,17 @@ class FilterResult extends Component {
     super();
     this.state = {
       alignment: "left", //state to handle group button click highlight
-      tags: []
+      tags: [],
+      startDate: null,
+      endDate: null,
+
     };
     this.handleAlignment = this.handleAlignment.bind(this);
     this.handleAddTags = this.handleAddTags.bind(this);
     this.handleDeleteTags = this.handleDeleteTags.bind(this);
   }
+
+
   //this handle the highlight of button group
   handleAlignment = (event, alignment) => {
     console.log("handle alignment filter results");
@@ -99,9 +107,40 @@ class FilterResult extends Component {
       tags: this.state.tags.filter(tag => tag !== deletedTags)
     });
   }
+
+  handleFilter = () => {
+    const filterQuery = {
+      tags: this.state.tags,
+      startDate: this.state.startDate ? new Date(this.state.startDate).toISOString() : null,
+      endDate: this.state.endDate ? new Date(this.state.endDate + ' 23:00:00').toISOString() : null,
+    }
+    
+    this.props.auth
+    .getAccessToken()
+    .then(token => {
+      this.props.getFilteredPostsActions(filterQuery,token);
+    })
+    .catch(err => console.log(err));
+
+   
+  }
+
+  handleStartDateChange = (event) => {
+    this.setState({
+      startDate: event.format('MM/DD/YYYY'),
+    })
+  }
+  handleEndDateChange = (event) => {
+    this.setState({
+      endDate: event.format('MM/DD/YYYY'),
+    })
+  }
+  
   render() {
+    
     const { classes } = this.props;
     const { alignment } = this.state;
+
     return (
       <Card className={classes.FilterContainer}>
         <div className={classes.FilterHeaderContainer}>
@@ -120,18 +159,18 @@ class FilterResult extends Component {
 
             <MuiPickersUtilsProvider utils={moment}>
               <div className={classes.DatePickerContainer}>
-                <DatePicker
-                  onChange={() => {}}
+              <DatePicker
+                  onChange={(event) => {this.handleStartDateChange(event)}}
+                  value ={this.state.startDate}
                   label="From"
-                  disableFuture
-                  format="01/01/2019"
+                  format="MM/DD/YYYY"
                   className={classes.DatePicker}
                 />
                 <DatePicker
-                  onChange={() => {}}
+                  onChange={(event) => {this.handleEndDateChange(event)}}
+                  value ={this.state.endDate}
                   label="To"
-                  disableFuture
-                  format="02/01/2019"
+                  format="MM/DD/YYYY"
                   className={classes.DatePicker}
                 />
               </div>
@@ -199,6 +238,7 @@ class FilterResult extends Component {
             variant="contained"
             color="secondary"
             className={classes.ApplyChangeButton}
+            onClick={this.handleFilter}
           >
             APPLY CHANGES
           </Button>
@@ -207,4 +247,11 @@ class FilterResult extends Component {
     );
   }
 }
-export default withStyles(styles)(FilterResult);
+
+const mapStateToProps = state => ({
+});
+
+export default connect(
+  mapStateToProps,
+  {getFilteredPostsActions}
+)(withAuth(withStyles(styles)(FilterResult)));
