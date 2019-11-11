@@ -194,7 +194,7 @@ class Explore extends Component {
                     style={{ transformOrigin: "0 0 0" }}
                     {...(this.state.listView ? { timeout: 1300 } : {})}
                   >
-                    <div>
+                    <div style={{marginBottom:150}}>
                     {renderCardListView}
                     </div>
                   </Grow>
