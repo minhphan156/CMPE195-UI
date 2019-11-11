@@ -25,7 +25,8 @@ const styles = {
     fontWeight: "bold",
     fontSize: 22,
     textAlign: "center",
-    height: 40
+    paddingBottom: 10,
+    paddingTop: 10
   },
   FilterButtonGroup: {
     fontSize: 12
@@ -41,7 +42,7 @@ const styles = {
   },
   SubHeader: {
     fontSize: 15,
-    marginTop: 10
+    paddingTop: 15
   },
   DatePicker: {
     width: 115
@@ -80,14 +81,12 @@ class FilterResult extends Component {
       alignment: "left", //state to handle group button click highlight
       tags: [],
       startDate: null,
-      endDate: null,
-
+      endDate: null
     };
     this.handleAlignment = this.handleAlignment.bind(this);
     this.handleAddTags = this.handleAddTags.bind(this);
     this.handleDeleteTags = this.handleDeleteTags.bind(this);
   }
-
 
   //this handle the highlight of button group
   handleAlignment = (event, alignment) => {
@@ -111,33 +110,34 @@ class FilterResult extends Component {
   handleFilter = () => {
     const filterQuery = {
       tags: this.state.tags,
-      startDate: this.state.startDate ? new Date(this.state.startDate).toISOString() : null,
-      endDate: this.state.endDate ? new Date(this.state.endDate + ' 23:00:00').toISOString() : null,
-    }
-    
+      startDate: this.state.startDate
+        ? new Date(this.state.startDate).toISOString()
+        : null,
+      endDate: this.state.endDate
+        ? new Date(this.state.endDate + " 23:00:00").toISOString()
+        : null
+    };
+
     this.props.auth
-    .getAccessToken()
-    .then(token => {
-      this.props.getFilteredPostsActions(filterQuery,token);
-    })
-    .catch(err => console.log(err));
+      .getAccessToken()
+      .then(token => {
+        this.props.getFilteredPostsActions(filterQuery, token);
+      })
+      .catch(err => console.log(err));
+  };
 
-   
-  }
+  handleStartDateChange = event => {
+    this.setState({
+      startDate: event.format("MM/DD/YYYY")
+    });
+  };
+  handleEndDateChange = event => {
+    this.setState({
+      endDate: event.format("MM/DD/YYYY")
+    });
+  };
 
-  handleStartDateChange = (event) => {
-    this.setState({
-      startDate: event.format('MM/DD/YYYY'),
-    })
-  }
-  handleEndDateChange = (event) => {
-    this.setState({
-      endDate: event.format('MM/DD/YYYY'),
-    })
-  }
-  
   render() {
-    
     const { classes } = this.props;
     const { alignment } = this.state;
 
@@ -159,16 +159,20 @@ class FilterResult extends Component {
 
             <MuiPickersUtilsProvider utils={moment}>
               <div className={classes.DatePickerContainer}>
-              <DatePicker
-                  onChange={(event) => {this.handleStartDateChange(event)}}
-                  value ={this.state.startDate}
+                <DatePicker
+                  onChange={event => {
+                    this.handleStartDateChange(event);
+                  }}
+                  value={this.state.startDate}
                   label="From"
                   format="MM/DD/YYYY"
                   className={classes.DatePicker}
                 />
                 <DatePicker
-                  onChange={(event) => {this.handleEndDateChange(event)}}
-                  value ={this.state.endDate}
+                  onChange={event => {
+                    this.handleEndDateChange(event);
+                  }}
+                  value={this.state.endDate}
                   label="To"
                   format="MM/DD/YYYY"
                   className={classes.DatePicker}
@@ -176,36 +180,6 @@ class FilterResult extends Component {
               </div>
             </MuiPickersUtilsProvider>
           </div>
-          <ToggleButtonGroup
-            value={alignment}
-            exclusive
-            onChange={this.handleAlignment}
-            className={classes.ToggleButtonGroupContainer}
-          >
-            <ToggleButton
-              className={classes.FilterButtonGroup}
-              classes={{ selected: classes.selectedButton }}
-              value="left"
-            >
-              Viewed
-            </ToggleButton>
-
-            <ToggleButton
-              classes={{ selected: classes.selectedButton }}
-              className={classes.FilterButtonGroup}
-              value="center"
-            >
-              Unviewed
-            </ToggleButton>
-
-            <ToggleButton
-              classes={{ selected: classes.selectedButton }}
-              className={classes.FilterButtonGroup}
-              value="right"
-            >
-              All
-            </ToggleButton>
-          </ToggleButtonGroup>
           <div>
             <Typography variant="h6" className={classes.SubHeader} gutterBottom>
               Tags
@@ -222,16 +196,36 @@ class FilterResult extends Component {
             </MuiThemeProvider>
           </div>
           <div>
-            <Typography variant="h6" className={classes.SubHeader} gutterBottom>
-              Document Types
-            </Typography>
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.ButtonDocType}
+            <ToggleButtonGroup
+              value={alignment}
+              exclusive
+              onChange={this.handleAlignment}
+              className={classes.ToggleButtonGroupContainer}
             >
-              Jupyter
-            </Button>
+              <ToggleButton
+                className={classes.FilterButtonGroup}
+                classes={{ selected: classes.selectedButton }}
+                value="left"
+              >
+                Viewed
+              </ToggleButton>
+
+              <ToggleButton
+                classes={{ selected: classes.selectedButton }}
+                className={classes.FilterButtonGroup}
+                value="center"
+              >
+                Unviewed
+              </ToggleButton>
+
+              <ToggleButton
+                classes={{ selected: classes.selectedButton }}
+                className={classes.FilterButtonGroup}
+                value="right"
+              >
+                All
+              </ToggleButton>
+            </ToggleButtonGroup>
           </div>
 
           <Button
@@ -248,10 +242,9 @@ class FilterResult extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  {getFilteredPostsActions}
+  { getFilteredPostsActions }
 )(withAuth(withStyles(styles)(FilterResult)));

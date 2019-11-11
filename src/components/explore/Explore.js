@@ -8,29 +8,10 @@ import { getPostsActions } from "../../actions/getPostsActions";
 import { withAuth } from "@okta/okta-react";
 import MDSpinner from "react-md-spinner";
 import moment from "moment";
-import Sort from "@material-ui/icons/Sort"; //sorting icon
-import { Button } from "semantic-ui-react";
+import { KeyboardArrowDown, KeyboardArrowUp, Sort } from "@material-ui/icons"; // import { Button } from "semantic-ui-react";
+import Button from "@material-ui/core/Button";
 
 const styles = {
-  FilterButtonGroup: {
-    fontSize: 12
-  },
-  selectedButton: {
-    backgroundColor: "#BFE3EE !important",
-    fontWeight: "bold"
-  },
-  ToggleButtonGroupContainerListView: {
-    width: "fit-content",
-    borderRadius: 17,
-    marginLeft: 530,
-    marginBottom: 5
-  },
-  ToggleButtonGroupContainerGridView: {
-    width: "fit-content",
-    borderRadius: 17,
-    marginLeft: 115,
-    marginBottom: 5
-  },
   LoadingScreen: {
     marginTop: 100,
     marginBottom: 900,
@@ -45,39 +26,60 @@ const styles = {
   SortBarContainerListView: {
     display: "flex",
     position: "fixed",
-    top: 81,
-    left: -35,
+    top: 80,
+    left: -50,
     zIndex: 1,
-    height: 80,
-    width: 2300,
-    alignItems: "flex-end",
+    height: 60,
+    width: "100%",
+    // alignItems: "flex-end",
     backgroundColor: "white"
   },
-  SortBarContainerGridView: {
-    display: "flex",
-    position: "fixed",
-    top: 81,
-    left: -314,
-    zIndex: 1,
-    height: 80,
-    width: 2300,
-    alignItems: "flex-end",
-    backgroundColor: "white"
+  // SortBarContainerGridView: {
+  //   display: "flex",
+  //   position: "fixed",
+  //   top: 81,
+  //   left: -314,
+  //   zIndex: 1,
+  //   height: 80,
+  //   width: 2300,
+  //   alignItems: "flex-end",
+  //   backgroundColor: "white"
+  // },
+  SortIcon: {
+    marginTop: -2,
+    marginRight: 8
   },
   SortBar: {
     display: "flex",
-    marginTop: 17,
+    marginTop: 27,
     marginLeft: 520,
     color: "#F0605C"
   },
   SortBarText: {
     fontSize: 15,
-    height: 0,
-    margin: 0
-  },
-  RenderCardGridViewSpacing: {
-    marginLeft: 110
+    fontWeight: 700,
+    marginTop: -10,
+    marginRight: 30,
+    paddingTop: 0,
+    paddingBottom: 0
+
+    // margin: 0
   }
+  // RenderCardGridViewSpacing: {
+  //   marginLeft: 110
+  // },
+  // ToggleButtonGroupContainerListView: {
+  //   width: "fit-content",
+  //   borderRadius: 17,
+  //   marginLeft: 530,
+  //   marginBottom: 5
+  // },
+  // ToggleButtonGroupContainerGridView: {
+  //   width: "fit-content",
+  //   borderRadius: 17,
+  //   marginLeft: 115,
+  //   marginBottom: 5
+  // },
 };
 class Explore extends Component {
   constructor() {
@@ -120,37 +122,40 @@ class Explore extends Component {
     });
   }
 
-
   handleSort = () => {
-    if(this.state.descendingSort){
-      this.props.posts.posts.sort(function(a,b){
-        return new Date(b.created_at) - new Date(a.created_at);
-      });
+    if (this.state.descendingSort) {
       this.setState({
         descendingSort: false
-      })
-    } else{
-      this.props.posts.posts.sort(function(a,b){
-        return new Date(a.created_at) - new Date(b.created_at);
       });
+    } else {
       this.setState({
         descendingSort: true
-      })
+      });
     }
-  }
+  };
 
   render() {
     const { classes } = this.props;
     const { posts, isNotFound } = this.props.posts;
 
-    if (isNotFound ){
-      alert("We can not find the posts you are looking for")
+    if (this.state.descendingSort) {
+      this.props.posts.posts.sort(function(a, b) {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+    } else {
+      this.props.posts.posts.sort(function(a, b) {
+        return new Date(a.created_at) - new Date(b.created_at);
+      });
+    }
+
+    if (isNotFound) {
+      alert("We can not find the posts you are looking for");
       this.props.auth
-      .getAccessToken()
-      .then(token => {
-        this.props.getPostsActions(token);
-      })
-      .catch(err => console.log(err));
+        .getAccessToken()
+        .then(token => {
+          this.props.getPostsActions(token);
+        })
+        .catch(err => console.log(err));
     }
     if (posts.length >= 1) {
       const renderCardListView = posts.map(post => (
@@ -170,35 +175,37 @@ class Explore extends Component {
 
       return (
         <div style={{ marginTop: 70 }}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            style={{ marginTop: 87 }}
-          >
-              <Grid item xs={3} className={classes.FilterResultContainer}>
-                <FilterResult />
-              </Grid>
+          <Grid container direction="row" justify="center">
+            <Grid item xs={3} className={classes.FilterResultContainer}>
+              <FilterResult />
+            </Grid>
 
-               <Grid item xs={12} className={classes.SortBarContainerListView}>
-                <div className={classes.SortBar}>
-                  <Button onClick={this.handleSort} className={classes.SortBarText}>
-                    Sort {this.state.descendingSort ? 'Latest' : 'Earliest'}
-                  </Button>
-                  <Sort />
-                </div>
-              </Grid>
-                <Grid item xs={8}>
-                  <Grow
-                    in={this.state.listView}
-                    style={{ transformOrigin: "0 0 0" }}
-                    {...(this.state.listView ? { timeout: 1300 } : {})}
-                  >
-                    <div style={{marginBottom:150}}>
-                    {renderCardListView}
-                    </div>
-                  </Grow>
-                </Grid>           
+            <Grid item xs={12} className={classes.SortBarContainerListView}>
+              <div className={classes.SortBar}>
+                {" "}
+                <Sort className={classes.SortIcon} />
+                <Button
+                  onClick={this.handleSort}
+                  className={classes.SortBarText}
+                >
+                  Sort by Date{" "}
+                  {this.state.descendingSort ? (
+                    <KeyboardArrowDown />
+                  ) : (
+                    <KeyboardArrowUp />
+                  )}
+                </Button>
+              </div>
+            </Grid>
+            <Grid item xs={8}>
+              <Grow
+                in={this.state.listView}
+                style={{ transformOrigin: "0 0 0" }}
+                {...(this.state.listView ? { timeout: 1300 } : {})}
+              >
+                <div style={{ marginBottom: 100 }}>{renderCardListView}</div>
+              </Grow>
+            </Grid>
           </Grid>
         </div>
       );
@@ -222,7 +229,7 @@ class Explore extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts,
+  posts: state.posts
 });
 
 export default connect(

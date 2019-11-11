@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";	
-
+import { Link } from "react-router-dom";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Grid, Button, TextField, Typography } from "@material-ui/core";
 import { uploadNotebookDraft } from "../../actions/uploadActions";
 import ChipInput from "material-ui-chip-input";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -15,7 +14,7 @@ import MDSpinner from "react-md-spinner";
 import Done from "@material-ui/icons/Done";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import "filepond/dist/filepond.min.css";
-import { withAuth } from '@okta/okta-react';
+import { withAuth } from "@okta/okta-react";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -34,18 +33,21 @@ class Upload extends Component {
       summary: "",
       dataset: [],
       notebook: null,
-      isSubmit: false
+      isSubmit: false,
+      isFilledOut: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleAddTags = this.handleAddTags.bind(this);
     this.handleDeleteTags = this.handleDeleteTags.bind(this);
     this.handleInit = this.handleInit.bind(this);
+    this.checkForm = this.checkForm.bind(this);
   }
 
   // update the component state of TextField
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+    this.checkForm();
   }
 
   // add hashtags
@@ -53,6 +55,7 @@ class Upload extends Component {
     this.setState({
       tags: [...this.state.tags, tags]
     });
+    this.checkForm();
   }
 
   // delete hashtags
@@ -60,6 +63,7 @@ class Upload extends Component {
     this.setState({
       tags: this.state.tags.filter(tag => tag !== deletedTags)
     });
+    this.checkForm();
   }
 
   onSubmit(e) {
@@ -76,13 +80,38 @@ class Upload extends Component {
     };
     this.setState({ isSubmit: true });
 
-    this.props.auth.getAccessToken().then(token => {
-      this.props.uploadNotebookDraft(uploadData, this.props.history, token);
-    }).catch(err => console.log(err));
+    this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.uploadNotebookDraft(uploadData, this.props.history, token);
+      })
+      .catch(err => console.log(err));
   }
 
   handleInit() {
     console.log("FilePond instance has initialised", this.pond);
+  }
+
+  checkForm() {
+    // title: "",
+    // authors: [],
+    // time: "",
+    // tags: [],
+    // summary: "",
+    // dataset: [],
+    // notebook: null,
+
+    if (
+      this.state.title != "" &&
+      this.state.authors.length != 0 &&
+      this.state.tags.length != 0 &&
+      this.state.summary != "" &&
+      this.state.notebook != null
+    ) {
+      this.setState({ isFilledOut: true });
+    } else {
+      this.setState({ isFilledOut: false });
+    }
   }
 
   render() {
@@ -96,7 +125,9 @@ class Upload extends Component {
           width: "300px"
         }}
       >
-        <h2>Upload Notebook</h2>
+        <br></br>
+        <Grid id="AboutContainerTitle">Upload Notebook</Grid>
+        <br></br>
         <form
           style={{
             display: "flex",
@@ -170,7 +201,7 @@ class Upload extends Component {
             value={this.state.dataset}
             onChange={this.onChange}
             name="dataset"
-            label="Dataset Links"
+            label="Link to Dataset (Optional)"
             margin="normal"
             variant="outlined"
           />
@@ -196,11 +227,12 @@ class Upload extends Component {
               this.setState({
                 notebook: fileItems.map(fileItem => fileItem.file)
               });
+              this.checkForm();
             }}
           />
           {upload ? (
             <div style={{ width: 350 }}>
-              <Link to="/preview" className="navbarMenuButtons">	
+              <Link to="/preview" className="navbarMenuButtons">
                 <Button
                   type="submit"
                   variant="contained"
@@ -213,7 +245,7 @@ class Upload extends Component {
                 >
                   Preview
                 </Button>
-              </Link>	
+              </Link>
               <Done
                 style={{ color: "green", marginLeft: 5, marginBottom: -6 }}
               />
@@ -231,7 +263,7 @@ class Upload extends Component {
               </Button>
               <MDSpinner style={{ marginLeft: 5 }} />
             </div>
-          ) : this.state.notebook ? (
+          ) : this.state.isFilledOut ? (
             <Button
               type="submit"
               variant="contained"
@@ -252,6 +284,7 @@ class Upload extends Component {
             </Button>
           )}
         </form>
+        <br></br>
       </div>
     );
   }
