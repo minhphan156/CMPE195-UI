@@ -55,15 +55,15 @@ class Post extends Component {
   constructor() {
     super();
     this.state = {
-      title: "",
-      authors: "",
-      time: "",
-      tags: [],
-      summary: "",
-      dataset: null,
-      notebook: null,
-      isSubmit: false,
-      views: 167
+      // title: "",
+      // authors: "",
+      // time: "",
+      // tags: [],
+      // summary: "",
+      // dataset: null,
+      // notebook: null,
+      // isSubmit: false,
+      // views: 167
     };
   }
 
@@ -73,111 +73,116 @@ class Post extends Component {
     let dataLinkButton;
     let dataLink;
 
-    // if (upload !== null) {
-    dataLink = "/" + upload.metadata.dataset;
+    if (upload != null) {
+      dataLink = "/" + upload.metadata.dataset;
 
-    // if there is a dataset, display a link to it
-    if (upload.metadata.dataset !== "null") {
-      dataLinkButton = (
-        <Button size="medium" variant="outlined">
-          <InsertLink className={classes.linkIcon} />
-          Data Set
-        </Button>
-      );
-    } else {
-      dataLinkButton = <br />;
-    }
-    // }
+      // if there is a dataset, display a link to it
+      if (upload.metadata.dataset != "") {
+        dataLinkButton = (
+          <Button size="medium" variant="outlined">
+            <InsertLink className={classes.linkIcon} />
+            Data Set
+          </Button>
+        );
+      } else {
+        dataLinkButton = <br />;
+      }
 
-    return (
-      <Grid
-        container
-        spacing={0}
-        direction="column"
-        justify="flex-start"
-        alignItems="center"
-      >
-        <Paper className="infoPaper">
-          <Grid container justify="space-between" alignItems="flex-start">
-            <Grid className="KnowledgePostTitle" item>
-              {upload.metadata.title}
-            </Grid>
-            <Grid item>
-              <Grid
-                container
-                className="viewContainer"
-                justify="space-between"
-                alignItems="flex-start"
-              >
-                <Grid className="viewContainer" className={classes.viewCount}>
-                  {upload.metadata.views}
-                </Grid>
-                <Grid className="viewContainer">
-                  <Visibility className={classes.visibilityIcon} />
+      return (
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          justify="flex-start"
+          alignItems="center"
+        >
+          <Paper className="infoPaper">
+            <Grid container justify="space-between" alignItems="flex-start">
+              <Grid className="KnowledgePostTitle" item>
+                {upload.metadata.title}
+              </Grid>
+              <Grid item>
+                <Grid
+                  container
+                  className="viewContainer"
+                  justify="space-between"
+                  alignItems="flex-start"
+                >
+                  <Grid className="viewContainer" className={classes.viewCount}>
+                    {upload.metadata.views == null
+                      ? "0"
+                      : upload.metadata.views}
+                  </Grid>
+                  <Grid className="viewContainer">
+                    <Visibility className={classes.visibilityIcon} />
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
 
-          <Grid container justify="space-between" alignItems="flex-start">
+            <Grid container justify="space-between" alignItems="flex-start">
+              <Grid className="KnowledgePostText" item>
+                {upload.metadata.authors}
+                <div className="KnowledgePostTime">{upload.metadata.time}</div>
+              </Grid>
+            </Grid>
+            <Grid container justify="flex-end" alignItems="flex-start">
+              <Grid item>
+                <Link to="/DOWNLOAD" className="PostButtons">
+                  <Button size="medium" variant="outlined">
+                    <CloudDownload className={classes.downloadIcon} />
+                    ipynb
+                  </Button>
+                </Link>
+              </Grid>
+
+              <Grid item>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={upload.metadata.dataset}
+                >
+                  {dataLinkButton}
+                </a>
+              </Grid>
+            </Grid>
+
             <Grid className="KnowledgePostText" item>
-              {upload.metadata.authors}
-              <div className="KnowledgePostTime">{upload.metadata.time}</div>
-            </Grid>
-          </Grid>
-          <Grid container justify="flex-end" alignItems="flex-start">
-            <Grid item>
-              <Link to="/DOWNLOAD" className="PostButtons">
-                <Button size="medium" variant="outlined">
-                  <CloudDownload className={classes.downloadIcon} />
-                  ipynb
-                </Button>
-              </Link>
+              {"Tags: "}
+              {upload.metadata.tags.map(item => (
+                <Chip
+                  color="primary"
+                  label={item}
+                  classes={{
+                    root: classes.chipRoot
+                  }}
+                />
+              ))}
             </Grid>
 
-            <Grid item>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={upload.metadata.dataset}
-              >
-                {dataLinkButton}
-              </a>
-            </Grid>
-          </Grid>
+            <br />
 
-          <Grid className="KnowledgePostText" item>
-            {"Tags: "}
-            {upload.metadata.tags.map(item => (
-              <Chip
-                color="primary"
-                label={item}
-                classes={{
-                  root: classes.chipRoot
-                }}
+            <Grid className="KnowledgePostSummary" item>
+              {upload.metadata.summary}
+            </Grid>
+          </Paper>
+
+          <Paper className="notebookPaper">
+            <Grid>
+              <div
+                id="notebook-container"
+                dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
               />
-            ))}
-          </Grid>
-
-          <br />
-
-          <Grid className="KnowledgePostSummary" item>
-            {upload.metadata.summary}
-          </Grid>
-        </Paper>
-
-        <Paper className="notebookPaper">
-          <Grid>
-            <div
-              id="notebook-container"
-              dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
-            />
-          </Grid>
-        </Paper>
-        <br></br>
-        <br></br>
-      </Grid>
-    );
+            </Grid>
+          </Paper>
+          <br></br>
+          <br></br>
+        </Grid>
+      );
+    } else {
+      this.props.history.push("/explore");
+      return null;
+    }
   }
 }
 

@@ -1,4 +1,9 @@
-import { GET_POSTS, GET_FILTERED_POSTS, NO_POSTS_FOUND } from "./types";
+import {
+  GET_POSTS,
+  GET_FILTERED_POSTS,
+  NO_POSTS_FOUND,
+  SET_EXPLORE_STATUS
+} from "./types";
 import axios from "axios";
 
 export const getPostsActions = accessToken => dispatch => {
@@ -91,4 +96,11 @@ export const getFilteredPostsActions = (
         console.log(err.response.data);
       }
     });
+};
+
+export const setExploreStatus = route => dispatch => {
+  dispatch({
+    type: SET_EXPLORE_STATUS,
+    payload: route
+  });
 };
