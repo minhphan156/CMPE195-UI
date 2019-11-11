@@ -10,7 +10,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import InsertLink from "@material-ui/icons/InsertLink";
 import { uploadNotebookFinal } from "../../actions/uploadActions";
-import { withAuth } from '@okta/okta-react';
+import { withAuth } from "@okta/okta-react";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,10 +36,18 @@ const styles = theme => ({
 
 class Post extends Component {
   handlePublish = () => {
-    this.props.auth.getAccessToken().then(token => {
-      this.props.uploadNotebookFinal(this.props.history, token);
-    }).catch(err => console.log(err));
+    this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.uploadNotebookFinal(this.props.history, token);
+      })
+      .catch(err => console.log(err));
+  };
+
+  async componentDidMount() {
+    window.scrollTo(0, 0);
   }
+
   render() {
     const { classes } = this.props;
     const { upload } = this.props.upload;
@@ -65,80 +73,76 @@ class Post extends Component {
     return (
       <div>
         {upload ? (
-          <div>
-            <Grid
-              container
-              spacing={0}
-              direction="row"
-              justify="center"
-              alignItems="flex-start"
-            >
-              <Paper className="infoPaper">
-                <Grid container justify="space-between" alignItems="flex-start">
-                  <Grid className="KnowledgePostTitle" item>
-                    {upload.metadata.title}
-                  </Grid>
-                  <Grid item>
-                    <Link to="Post">
-                      <Button onClick ={this.handlePublish} class="publishbutton">Publish</Button>
-                    </Link>
-                  </Grid>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            justify="flex-start"
+            alignItems="center"
+          >
+            <Paper className="infoPaper">
+              <Grid container justify="space-between" alignItems="flex-start">
+                <Grid className="KnowledgePostTitle" item>
+                  {upload.metadata.title}
                 </Grid>
+                <Grid item>
+                  <Link to="Post">
+                    <Button onClick={this.handlePublish} class="publishbutton">
+                      Publish
+                    </Button>
+                  </Link>
+                </Grid>
+              </Grid>
 
+              <Grid container justify="space-between" alignItems="flex-start">
                 <Grid className="KnowledgePostText" item>
                   {upload.metadata.authors}
                   <div className="KnowledgePostTime">
                     {upload.metadata.time}
                   </div>
                 </Grid>
-                <Grid container justify="flex-end" alignItems="flex-start">
-                  <Grid className="DataSetButton" item>
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={upload.metadata.dataset}
-                    >
-                      {dataLinkButton}
-                    </a>
-                  </Grid>
-                </Grid>
-                <Grid className="KnowledgePostText" item>
-                  {"Tags: "}
-                  {upload.metadata.tags.map(item => (
-                    <Chip
-                      color="primary"
-                      label={item}
-                      classes={{
-                        root: classes.chipRoot
-                      }}
-                    />
-                  ))}
-                </Grid>
+              </Grid>
 
-                <br />
-                <Grid className="KnowledgePostSummary" item>
-                  {upload.metadata.summary}
+              <Grid container justify="flex-end" alignItems="flex-start">
+                <Grid className="DataSetButton" item>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={upload.metadata.dataset}
+                  >
+                    {dataLinkButton}
+                  </a>
                 </Grid>
-              </Paper>
-            </Grid>
-
-            <Grid
-              container
-              spacing={0}
-              direction="row"
-              justify="center"
-              alignItems="flex-start"
-            >
-              <Paper className="notebookPaper">
-                <Grid>
-                  <div
-                    id="notebook-container"
-                    dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
+              </Grid>
+              <Grid className="KnowledgePostText" item>
+                {"Tags: "}
+                {upload.metadata.tags.map(item => (
+                  <Chip
+                    color="primary"
+                    label={item}
+                    classes={{
+                      root: classes.chipRoot
+                    }}
                   />
-                </Grid>
-              </Paper>
-            </Grid>
-          </div>
+                ))}
+              </Grid>
+
+              <br />
+              <Grid className="KnowledgePostSummary" item>
+                {upload.metadata.summary}
+              </Grid>
+            </Paper>
+            <Paper className="notebookPaper">
+              <Grid>
+                <div
+                  id="notebook-container"
+                  dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
+                />
+              </Grid>
+            </Paper>
+            <br></br>
+            <br></br>
+          </Grid>
         ) : null}
       </div>
     );
@@ -153,6 +157,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    {uploadNotebookFinal}
+    { uploadNotebookFinal }
   )(withAuth(Post))
 );
