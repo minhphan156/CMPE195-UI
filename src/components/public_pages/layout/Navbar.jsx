@@ -75,7 +75,8 @@ const styles = theme => ({
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: 200
-    }
+    },
+    fontSize: 13
   },
   sectionDesktop: {
     display: "none",
@@ -99,12 +100,34 @@ class Navbar extends Component {
       authenticated: null,
       search: ""
     };
-    this.checkAuthentication = checkAuthentication.bind(this);
+    // this.checkAuthentication = checkAuthentication.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.upload = this.upload.bind(this);
     this.onSearchClick = this.onSearchClick.bind(this);
+    // }
+
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
   }
+
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
+  componentWillReceiveProps() {
+    this.checkAuthentication();
+  }
+  componentDidUpdate() {
+    this.checkAuthentication();
+  }
+  componentDidMount() {
+    this.checkAuthentication();
+  }
+
   onSearchClick(e) {
     e.preventDefault();
     // const newQuery = {
@@ -115,20 +138,13 @@ class Navbar extends Component {
     this.setState({ search: "" });
   }
 
-  async componentDidMount() {
-    this.checkAuthentication();
-  }
-
-  async componentDidUpdate() {
-    this.checkAuthentication();
-  }
-
   async login() {
-    this.props.auth.login("/");
+    this.props.auth.login("/explore");
   }
 
   async logout() {
     this.props.auth.logout("/");
+    this.setState({ anchorEl: null });
   }
 
   upload() {
@@ -201,124 +217,111 @@ class Navbar extends Component {
       }
     }
 
-    return (
-      <div id="fableHeader">
-        {this.state.authenticated !== null && (
-          <div>
-            {this.state.authenticated && (
-              <div>
-                <Grid
-                  container
-                  className="navbarContainerAuth headerfont"
-                  spacing={0}
-                  direction="row"
-                  justify="space-between"
-                  alignItems="center"
-                >
-                  <Grid className="navbarLogoAuth" item>
-                    <Link to="/explore">
-                      <img className="logo-whiteAuth" src={ourLogo} alt="" />
-                    </Link>
-                  </Grid>
+    const SURDNavbar = this.state.authenticated ? (
+      <div>
+        <Grid
+          container
+          className="navbarContainerAuth headerfont"
+          spacing={0}
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Grid className="navbarLogoAuth" item>
+            <Link to="/explore">
+              <img className="logo-whiteAuth" src={ourLogo} alt="" />
+            </Link>
+          </Grid>
 
-                  <Grid className="searchBarAuth" item lg={6}>
-                    {searchBar}
-                  </Grid>
+          <Grid className="searchBarAuth" item lg={6}>
+            {searchBar}
+          </Grid>
 
-                  <Grid item>
-                    {makePostButton}
-                    <IconButton
-                      className="profileIconContainer"
-                      aria-owns={open ? "menu-appbar" : undefined}
-                      aria-haspopup="true"
-                      onClick={this.handleMenu}
-                      color="inherit"
-                    >
-                      <img className="profileIcon" src={profileIcon} alt="" />
-                    </IconButton>
-                    <Menu
-                      id="menu-appbar"
-                      anchorEl={anchorEl}
-                      anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right"
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right"
-                      }}
-                      open={open}
-                      onClose={this.handleClose}
-                    >
-                      <MenuItem onClick={this.handleClose}>My Account</MenuItem>
+          <Grid item>
+            {makePostButton}
+            <IconButton
+              className="profileIconContainer"
+              aria-owns={open ? "menu-appbar" : undefined}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="inherit"
+            >
+              <img className="profileIcon" src={profileIcon} alt="" />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+              }}
+              open={open}
+              onClose={this.handleClose}
+            >
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
+            </Menu>
+          </Grid>
+        </Grid>
+      </div>
+    ) : (
+      <div className="navbarContainer ">
+        <Grid
+          container
+          className="navbarContainer headerfont"
+          spacing={0}
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Grid className="navbarLogo" item>
+            <Link to="/">
+              <img className="logo-white " src={ourLogo} alt="" />
+            </Link>
+          </Grid>
+          <Grid
+            container
+            spacing={0}
+            justify="space-evenly"
+            alignItems="baseline"
+            xs={1}
+            sm={9}
+            md={8}
+            lg={7}
+          >
+            <Grid item className="headerMenu">
+              <Link to="/how-it-works" className="headerMenuLink">
+                How it Works
+              </Link>
+            </Grid>
+            <Grid item className="headerMenu">
+              <Link to="/security-manifesto" className="headerMenuLink">
+                Security
+              </Link>
+            </Grid>
+            <Grid item className="headerMenu">
+              <Link to="/about" className="headerMenuLink">
+                About
+              </Link>
+            </Grid>
+            <Grid item>
+              <Button class="button buttonGrey" primary onClick={this.login}>
+                Early Access Login
+              </Button>
+            </Grid>
+          </Grid>
 
-                      <MenuItem onClick={this.logout}>Logout</MenuItem>
-                    </Menu>
-                  </Grid>
-                </Grid>
-              </div>
-            )}
-            {!this.state.authenticated && (
-              <div className="navbarContainer ">
-                <Grid
-                  container
-                  className="navbarContainer headerfont"
-                  spacing={0}
-                  direction="row"
-                  justify="space-between"
-                  alignItems="center"
-                >
-                  <Grid className="navbarLogo" item>
-                    <Link to="/">
-                      <img className="logo-white " src={ourLogo} alt="" />
-                    </Link>
-                  </Grid>
-                  <Grid
-                    container
-                    spacing={0}
-                    justify="space-evenly"
-                    alignItems="baseline"
-                    xs={1}
-                    sm={9}
-                    md={8}
-                    lg={7}
-                  >
-                    <Grid item className="headerMenu">
-                      <Link to="/how-it-works" className="headerMenuLink">
-                        How it Works
-                      </Link>
-                    </Grid>
-                    <Grid item className="headerMenu">
-                      <Link to="/security-manifesto" className="headerMenuLink">
-                        Security
-                      </Link>
-                    </Grid>
-                    <Grid item className="headerMenu">
-                      <Link to="/about" className="headerMenuLink">
-                        About
-                      </Link>
-                    </Grid>
-                    <Grid item>
-                      <Button
-                        class="button buttonGrey"
-                        primary
-                        onClick={this.login}
-                      >
-                        Early Access Login
-                      </Button>
-                    </Grid>
-                  </Grid>
-
-                  <Grid className="smallMenu" item xs={1} sm={1} md={1} lg={1}>
-                    <NavbarMenu className="smallMenu" />
-                  </Grid>
-                </Grid>
-              </div>
-            )}
-          </div>
-        )}
+          <Grid className="smallMenu" item xs={1} sm={1} md={1} lg={1}>
+            <NavbarMenu className="smallMenu" />
+          </Grid>
+        </Grid>
       </div>
     );
+
+    return <div id="fableHeader">{SURDNavbar}</div>;
   }
 }
 

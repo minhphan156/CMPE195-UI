@@ -90,107 +90,93 @@ class Post extends Component {
     // }
 
     return (
-      <div>
-        <div>
-          <Grid
-            container
-            spacing={0}
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-          >
-            <Paper className="infoPaper">
-              <Grid container justify="space-between" alignItems="flex-start">
-                <Grid className="KnowledgePostTitle" item>
-                  {upload.metadata.title}
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Paper className="infoPaper">
+          <Grid container justify="space-between" alignItems="flex-start">
+            <Grid className="KnowledgePostTitle" item>
+              {upload.metadata.title}
+            </Grid>
+            <Grid item>
+              <Grid
+                container
+                className="viewContainer"
+                justify="space-between"
+                alignItems="flex-start"
+              >
+                <Grid className="viewContainer" className={classes.viewCount}>
+                  {upload.metadata.views}
                 </Grid>
-                <Grid item>
-                  <Grid
-                    container
-                    className="viewContainer"
-                    justify="space-between"
-                    alignItems="flex-start"
-                  >
-                    <Grid
-                      className="viewContainer"
-                      className={classes.viewCount}
-                    >
-                      {upload.metadata.views}
-                    </Grid>
-                    <Grid className="viewContainer">
-                      <Visibility className={classes.visibilityIcon} />
-                    </Grid>
-                  </Grid>
+                <Grid className="viewContainer">
+                  <Visibility className={classes.visibilityIcon} />
                 </Grid>
               </Grid>
-
-              <Grid container justify="space-between" alignItems="flex-start">
-                <Grid className="KnowledgePostText" item>
-                  {upload.metadata.authors}
-                  <div className="KnowledgePostTime">
-                  {upload.metadata.time}
-                  </div>
-                </Grid>
-              </Grid>
-
-              <Grid container justify="flex-end" alignItems="flex-start">
-                <Grid item>
-                  <Link to="/DOWNLOAD" className="PostButtons">
-                    <Button size="medium" variant="outlined">
-                      <CloudDownload className={classes.downloadIcon} />
-                      ipynb
-                    </Button>
-                  </Link>
-                </Grid>
-
-                <Grid item>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={upload.metadata.dataset}
-                  >
-                    {dataLinkButton}
-                  </a>
-                </Grid>
-              </Grid>
-              <Grid className="KnowledgePostText" item>
-                {"Tags: "}
-                {upload.metadata.tags.map(item => (
-                  <Chip
-                    color="primary"
-                    label={item}
-                    classes={{
-                      root: classes.chipRoot
-                    }}
-                  />
-                ))}
-              </Grid>
-
-              <br />
-              <Grid className="KnowledgePostSummary" item>
-                {upload.metadata.summary}
-              </Grid>
-            </Paper>
+            </Grid>
           </Grid>
 
-          <Grid
-            container
-            spacing={0}
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-          >
-            <Paper className="notebookoPaper">
-              <Grid>
-                <div
-                  id="notebook-container"
-                  dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
-                />
-              </Grid>
-            </Paper>
+          <Grid container justify="space-between" alignItems="flex-start">
+            <Grid className="KnowledgePostText" item>
+              {upload.metadata.authors}
+              <div className="KnowledgePostTime">{upload.metadata.time}</div>
+            </Grid>
           </Grid>
-        </div>
-      </div>
+          <Grid container justify="flex-end" alignItems="flex-start">
+            <Grid item>
+              <Link to="/DOWNLOAD" className="PostButtons">
+                <Button size="medium" variant="outlined">
+                  <CloudDownload className={classes.downloadIcon} />
+                  ipynb
+                </Button>
+              </Link>
+            </Grid>
+
+            <Grid item>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={upload.metadata.dataset}
+              >
+                {dataLinkButton}
+              </a>
+            </Grid>
+          </Grid>
+
+          <Grid className="KnowledgePostText" item>
+            {"Tags: "}
+            {upload.metadata.tags.map(item => (
+              <Chip
+                color="primary"
+                label={item}
+                classes={{
+                  root: classes.chipRoot
+                }}
+              />
+            ))}
+          </Grid>
+
+          <br />
+
+          <Grid className="KnowledgePostSummary" item>
+            {upload.metadata.summary}
+          </Grid>
+        </Paper>
+
+        <Paper className="notebookPaper">
+          <Grid>
+            <div
+              id="notebook-container"
+              dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
+            />
+          </Grid>
+        </Paper>
+        <br></br>
+        <br></br>
+      </Grid>
     );
   }
 }
