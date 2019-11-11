@@ -145,6 +145,12 @@ class Explore extends Component {
 
     if (isNotFound ){
       alert("We can not find the posts you are looking for")
+      this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.getPostsActions(token);
+      })
+      .catch(err => console.log(err));
     }
     if (posts.length >= 1) {
       const renderCardListView = posts.map(post => (
@@ -188,7 +194,7 @@ class Explore extends Component {
                     style={{ transformOrigin: "0 0 0" }}
                     {...(this.state.listView ? { timeout: 1300 } : {})}
                   >
-                    <div>
+                    <div style={{marginBottom:150}}>
                     {renderCardListView}
                     </div>
                   </Grow>
