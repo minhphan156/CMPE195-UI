@@ -130,10 +130,16 @@ class Navbar extends Component {
 
   onSearchClick(e) {
     e.preventDefault();
-    // const newQuery = {
-    //   search: this.state.search
-    // };
-    this.props.searchPost(this.state.search);
+    const newQuery = {
+      query: this.state.search
+    };
+
+    this.props.auth
+      .getAccessToken()
+      .then(token => {
+        this.props.searchPost(newQuery, token);
+      })
+      .catch(err => console.log(err));
 
     this.setState({ search: "" });
   }
