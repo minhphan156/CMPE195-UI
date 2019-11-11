@@ -1,15 +1,18 @@
-import { GET_POSTS, GET_FILTERED_POSTS } from "./types";
+import { GET_POSTS, GET_FILTERED_POSTS,NO_POSTS_FOUND } from "./types";
 import axios from "axios";
 
 export const getPostsActions = accessToken => dispatch => {
-  console.log(accessToken)
 
   axios
     .get("http://localhost:3001/api/search", {
       headers: { Authorization: `Bearer ${accessToken}` }
     })
     .then(res => {
-      console.log("getPostsActions ", res.data);
+      res.data.length < 1 ? 
+      dispatch({
+        type: NO_POSTS_FOUND,
+        payload: res.data
+      }) : 
       dispatch({
         type: GET_POSTS,
         payload: res.data
@@ -26,7 +29,6 @@ export const getPostsActions = accessToken => dispatch => {
 };
 
 export const searchPost = (newQuery, accessToken) => dispatch => {
-  console.log("getPostsActions search post ", newQuery);
   const searchPack = {
     query: newQuery
   };
@@ -55,15 +57,12 @@ export const searchPost = (newQuery, accessToken) => dispatch => {
     });
 };
 
-export const getFilteredPostsActions = (filterQuery,accessToken) => dispatch => {
-  console.log(accessToken)
- 
+export const getFilteredPostsActions = (filterQuery,accessToken) => dispatch => { 
   const searchPack = {
     tag: filterQuery.tags,
     startDate: filterQuery.startDate,
     endDate: filterQuery.endDate,
   };
-  console.log(searchPack)
   let config = {
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack,
@@ -71,11 +70,16 @@ export const getFilteredPostsActions = (filterQuery,accessToken) => dispatch => 
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
-      console.log("getFilteredPostsActions  ", res.data);
+      res.data.length < 1 ? 
+      dispatch({
+        type: NO_POSTS_FOUND,
+        payload: res.data
+      }) : 
       dispatch({
         type: GET_FILTERED_POSTS,
         payload: res.data
       });
+    
     })
     .catch(err => {
       console.log(err);

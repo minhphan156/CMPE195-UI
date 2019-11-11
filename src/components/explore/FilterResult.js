@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Card, Typography } from "@material-ui/core";
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
@@ -10,10 +10,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { connect } from "react-redux";
 import { withAuth } from "@okta/okta-react";
 import { getFilteredPostsActions } from "../../actions/getPostsActions";
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
 
 const styles = {
   FilterContainer: {
@@ -85,8 +81,6 @@ class FilterResult extends Component {
       tags: [],
       startDate: null,
       endDate: null,
-      startDateMoment: null,
-      endDateMoment: null
 
     };
     this.handleAlignment = this.handleAlignment.bind(this);
@@ -117,10 +111,10 @@ class FilterResult extends Component {
   handleFilter = () => {
     const filterQuery = {
       tags: this.state.tags,
-      startDate: this.state.startDateMoment.toISOString(),
-      endDate: this.state.endDateMoment.toISOString(),
+      startDate: this.state.startDate ? new Date(this.state.startDate).toISOString() : null,
+      endDate: this.state.endDate ? new Date(this.state.endDate).toISOString() : null,
     }
-
+    
     this.props.auth
     .getAccessToken()
     .then(token => {
@@ -134,13 +128,11 @@ class FilterResult extends Component {
   handleStartDateChange = (event) => {
     this.setState({
       startDate: event.format('MM/DD/YYYY'),
-      startDateMoment: event
     })
   }
   handleEndDateChange = (event) => {
     this.setState({
       endDate: event.format('MM/DD/YYYY'),
-      endDateMoment: event
     })
   }
   
@@ -148,7 +140,6 @@ class FilterResult extends Component {
     
     const { classes } = this.props;
     const { alignment } = this.state;
-    const { filteredPosts } = this.props.filteredPosts;
 
     return (
       <Card className={classes.FilterContainer}>
@@ -172,14 +163,12 @@ class FilterResult extends Component {
                   onChange={(event) => {this.handleStartDateChange(event)}}
                   value ={this.state.startDate}
                   label="From"
-                  disableFuture
                   format="MM/DD/YYYY"
                   className={classes.DatePicker}
                 />
                 <DatePicker
                   onChange={(event) => {this.handleEndDateChange(event)}}
                   value ={this.state.endDate}
-                  disablePast
                   label="To"
                   format="MM/DD/YYYY"
                   className={classes.DatePicker}
@@ -260,7 +249,6 @@ class FilterResult extends Component {
 }
 
 const mapStateToProps = state => ({
-  filteredPosts: state.filteredPosts
 });
 
 export default connect(
