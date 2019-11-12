@@ -139,8 +139,6 @@ class ExploreCard extends Component {
       this.props.getIndividualPostsActions(this.props.post, token, this.props.history);
     })
     .catch(err => console.log(err));
-
-    // this.props.history.push("/post")
   }
   render() {
     const { classes } = this.props;

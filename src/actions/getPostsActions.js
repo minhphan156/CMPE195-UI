@@ -25,8 +25,6 @@ export const getPostsActions = accessToken => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      // Axios can fail if response's status is not 2xx,
-      // so we should check api's error response here.
       if (err.response !== undefined) {
         console.log(err.response.data);
       }
@@ -41,8 +39,6 @@ export const searchPost = (newQuery, accessToken) => dispatch => {
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack
   };
-
-  console.log("searchPost-", searchPack);
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
@@ -77,7 +73,6 @@ export const getFilteredPostsActions = (
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack
   };
-  console.log("getFilteredPostsActions-", searchPack);
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
@@ -104,11 +99,9 @@ export const getIndividualPostsActions = (
   accessToken,
   history
 ) => dispatch => {
- 
   let config = {
     headers: { Authorization: `Bearer ${accessToken}` },
   };
-  console.log("getIndividualPostsActions-", post);
   axios
     .get(`http://localhost:3001/api/post/${post.hash_id}`, config)
     .then(res => {

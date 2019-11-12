@@ -105,7 +105,6 @@ class Explore extends Component {
         this.props.getPostsActions(token);
       })
       .catch(err => console.log(err));
-
     this.props.setExploreStatus(true);
   }
 

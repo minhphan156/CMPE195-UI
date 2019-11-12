@@ -52,23 +52,8 @@ const styles = theme => ({
 });
 
 class Post extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     // title: "",
-  //     // authors: "",
-  //     // time: "",
-  //     // tags: [],
-  //     // summary: "",
-  //     // dataset: null,
-  //     // notebook: null,
-  //     // isSubmit: false,
-  //     // views: 167
-  //   };
-  // }
 
   render() {
-    console.log("POST VIEW RENDERING")
     const { classes } = this.props;
     const { upload } = this.props.upload;
 
@@ -78,7 +63,7 @@ class Post extends Component {
       dataLink = "/" + upload.metadata.dataset;
 
       // if there is a dataset, display a link to it
-      if (upload.metadata.dataset !== "") {
+      if (upload.metadata.dataset !== "" || upload.metadata.dataset === null) {
         dataLinkButton = (
           <Button size="medium" variant="outlined">
             <InsertLink className={classes.linkIcon} />
@@ -141,7 +126,7 @@ class Post extends Component {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={upload.metadata.dataset ? upload.metadata.dataset : ""}
+                  href={upload.metadata.dataset}
                 >
                   {dataLinkButton}
                 </a>
@@ -194,7 +179,6 @@ class Post extends Component {
 // need to unpack the json object twice
 const mapStateToProps = state => ({
   upload: state.upload,
-
   //********************/this should be removed by the completion of issue #36
   // metaData: state.metaData.metaData
 });
