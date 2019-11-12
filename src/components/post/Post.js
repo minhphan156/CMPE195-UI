@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Visibility from "@material-ui/icons/Visibility";
 import InsertLink from "@material-ui/icons/InsertLink";
 import CloudDownload from "@material-ui/icons/CloudDownload";
-
+import moment from 'moment';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -52,32 +52,18 @@ const styles = theme => ({
 });
 
 class Post extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // title: "",
-      // authors: "",
-      // time: "",
-      // tags: [],
-      // summary: "",
-      // dataset: null,
-      // notebook: null,
-      // isSubmit: false,
-      // views: 167
-    };
-  }
 
   render() {
     const { classes } = this.props;
     const { upload } = this.props.upload;
+
     let dataLinkButton;
     let dataLink;
-
     if (upload != null) {
       dataLink = "/" + upload.metadata.dataset;
 
       // if there is a dataset, display a link to it
-      if (upload.metadata.dataset != "") {
+      if (upload.metadata.dataset !== "" || upload.metadata.dataset === null) {
         dataLinkButton = (
           <Button size="medium" variant="outlined">
             <InsertLink className={classes.linkIcon} />
@@ -109,9 +95,9 @@ class Post extends Component {
                   alignItems="flex-start"
                 >
                   <Grid className="viewContainer" className={classes.viewCount}>
-                    {upload.metadata.views == null
-                      ? "0"
-                      : upload.metadata.views}
+                    {upload
+                      ? upload.metadata.views
+                      : "0"}
                   </Grid>
                   <Grid className="viewContainer">
                     <Visibility className={classes.visibilityIcon} />
@@ -123,7 +109,7 @@ class Post extends Component {
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostText" item>
                 {upload.metadata.authors}
-                <div className="KnowledgePostTime">{upload.metadata.time}</div>
+                <div className="KnowledgePostTime">{moment(upload.metadata.createdAt).format("MMMM DD, YYYY hh:mm:ss")}</div>
               </Grid>
             </Grid>
             <Grid container justify="flex-end" alignItems="flex-start">
@@ -157,7 +143,9 @@ class Post extends Component {
                     root: classes.chipRoot
                   }}
                 />
-              ))}
+              ))
+              } 
+
             </Grid>
 
             <br />
@@ -171,7 +159,7 @@ class Post extends Component {
             <Grid>
               <div
                 id="notebook-container"
-                dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
+                dangerouslySetInnerHTML={{ __html: upload.html.final_html || upload.html}}
               />
             </Grid>
           </Paper>
@@ -179,7 +167,9 @@ class Post extends Component {
           <br></br>
         </Grid>
       );
-    } else {
+    } 
+    else {
+      console.log('return null post')
       this.props.history.push("/explore");
       return null;
     }
@@ -188,7 +178,7 @@ class Post extends Component {
 
 // need to unpack the json object twice
 const mapStateToProps = state => ({
-  upload: state.upload
+  upload: state.upload,
   //********************/this should be removed by the completion of issue #36
   // metaData: state.metaData.metaData
 });

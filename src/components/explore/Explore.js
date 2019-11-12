@@ -98,13 +98,13 @@ class Explore extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.auth
       .getAccessToken()
       .then(token => {
         this.props.getPostsActions(token);
       })
       .catch(err => console.log(err));
-
     this.props.setExploreStatus(true);
   }
 
@@ -170,6 +170,7 @@ class Explore extends Component {
       const renderCardListView = posts.map(post => (
         <Grid item xs={8}>
           <ExploreCard
+            history={this.props.history}
             hash_id={post.hash_id}
             title={post.title}
             summary={post.summary}
@@ -178,6 +179,7 @@ class Explore extends Component {
             tags={post.tags}
             preview_img={post.preview_img}
             authors={post.authors}
+            post={post}
           />
         </Grid>
       ));

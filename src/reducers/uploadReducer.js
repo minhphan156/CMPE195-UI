@@ -1,4 +1,4 @@
-import { UPLOAD } from "../actions/types";
+import { UPLOAD, GET_INDIVIDUAL_POST } from "../actions/types";
 
 const initialState = {
   upload: null
@@ -14,6 +14,11 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case UPLOAD:
       console.log("upload data reducer ", action.payload);
+      return {
+        ...state,
+        upload: action.payload
+      };
+    case GET_INDIVIDUAL_POST:
       return {
         ...state,
         upload: action.payload

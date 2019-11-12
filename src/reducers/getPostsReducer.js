@@ -2,13 +2,14 @@ import {
   GET_POSTS,
   GET_FILTERED_POSTS,
   NO_POSTS_FOUND,
-  SET_EXPLORE_STATUS
+  SET_EXPLORE_STATUS,
 } from "../actions/types";
 
 var initialState = {
   posts: [],
   isNotFound: false,
-  isInExplore: false
+  isInExplore: false,
+  individualPost: null
 };
 
 export default function(state = initialState, action) {
@@ -35,6 +36,7 @@ export default function(state = initialState, action) {
         ...state,
         isInExplore: action.payload
       };
+   
     default:
       return state;
   }

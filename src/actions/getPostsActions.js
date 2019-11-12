@@ -2,7 +2,8 @@ import {
   GET_POSTS,
   GET_FILTERED_POSTS,
   NO_POSTS_FOUND,
-  SET_EXPLORE_STATUS
+  SET_EXPLORE_STATUS,
+  GET_INDIVIDUAL_POST
 } from "./types";
 import axios from "axios";
 
@@ -24,8 +25,6 @@ export const getPostsActions = accessToken => dispatch => {
     })
     .catch(err => {
       console.log(err);
-      // Axios can fail if response's status is not 2xx,
-      // so we should check api's error response here.
       if (err.response !== undefined) {
         console.log(err.response.data);
       }
@@ -40,8 +39,6 @@ export const searchPost = (newQuery, accessToken) => dispatch => {
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack
   };
-
-  console.log("searchPost-", searchPack);
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
@@ -76,7 +73,6 @@ export const getFilteredPostsActions = (
     headers: { Authorization: `Bearer ${accessToken}` },
     params: searchPack
   };
-  console.log("getFilteredPostsActions-", searchPack);
   axios
     .get("http://localhost:3001/api/search", config)
     .then(res => {
@@ -89,6 +85,36 @@ export const getFilteredPostsActions = (
             type: GET_FILTERED_POSTS,
             payload: res.data
           });
+    })
+    .catch(err => {
+      console.log(err);
+      if (err.response !== undefined) {
+        console.log(err.response.data);
+      }
+    });
+};
+
+export const getIndividualPostsActions = (
+  post,
+  accessToken,
+  history
+) => dispatch => {
+  let config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+  axios
+    .get(`http://localhost:3001/api/post/${post.hash_id}`, config)
+    .then(res => {
+      res.data.length < 1
+        ? dispatch({
+            type: NO_POSTS_FOUND,
+            payload: res.data
+          })
+        : dispatch({
+            type: GET_INDIVIDUAL_POST,
+            payload: res.data
+          });
+          history.push('/post');
     })
     .catch(err => {
       console.log(err);

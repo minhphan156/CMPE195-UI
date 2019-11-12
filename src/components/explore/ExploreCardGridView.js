@@ -6,10 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 
 const styles = {
@@ -170,8 +167,6 @@ class ExploreCardGridView extends Component {
           disableActionSpacing
         >
           <div className={classes.CardActionRight}>
-            {/* <FavoriteIcon className={classes.CardActionRightFavIcon} />
-            <div className={classes.CardActionRightText}>1234</div> */}
             <Visibility className={classes.CardActionRightVisiIcon} />
             <div className={classes.CardActionRightText}>1234</div>
             <div className={classes.CardActionRightDocType}>PDF</div>
