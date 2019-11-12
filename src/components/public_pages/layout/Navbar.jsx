@@ -240,7 +240,7 @@ class Navbar extends Component {
           </Grid>
 
           <Grid className="searchBarAuth" item lg={6}>
-            {searchBar}
+            {this.props.posts.isInExplore == true ? searchBar : null}
           </Grid>
 
           <Grid item>

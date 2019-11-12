@@ -21,7 +21,6 @@ export default withAuth(
     async componentDidMount() {
       this.checkAuthentication();
       window.scrollTo(0, 0);
-
     }
 
     async componentDidUpdate() {
@@ -33,15 +32,6 @@ export default withAuth(
       this.props.auth.login("/");
     }
 
-    ///// THIS IS NOT USED IN THE OKTA PART
-    // async logout() {
-    //   // Redirect to '/' after logout
-    //   this.props.auth.logout("/");
-    // }
-
-    // onClick(e) {
-    //   this.props.getPricing();
-    // }
     render() {
       const resourceServerExamples = [
         {
@@ -56,73 +46,29 @@ export default withAuth(
         }
       ];
 
-      // if (this.state.authenticated === null) return null;
-      // return this.state.authenticated ? (
-      //   <button onClick={this.logout}>Logout</button>
-      // ) : (
-      //   <button onClick={this.login}>Login</button>
-      // );
-
-      return (
-        <div>
-          {this.state.authenticated !== null && (
+      if (this.state.authenticated != null) {
+        if (this.state.authenticated) {
+          this.props.history.push("/explore");
+          return null;
+        } else {
+          return (
             <div>
-              {this.state.authenticated && (
-                <div>
-                  <p>Welcome back, {this.state.userinfo.name}!</p>
-                  <p>
-                    You have successfully authenticated against your Okta org,
-                    and have been redirected back to this application. You now
-                    have an ID token and access token in local storage. Visit
-                    the <a href="/profile">My Profile</a> page to take a look
-                    inside the ID token.
-                  </p>
-                  <h3>Next Steps</h3>
-                  <p>
-                    Currently this application is a stand-alone front end
-                    application. At this point you can use the access token to
-                    authenticate yourself against resource servers that you
-                    control.
-                  </p>
-                  <p>
-                    This sample is designed to work with one of our resource
-                    server examples. To see access token authentication in
-                    action, please download one of these resource server
-                    examples:
-                  </p>
-                  <ul>
-                    {resourceServerExamples.map(example => (
-                      <li key={example.label}>
-                        <a href={example.url}>{example.label}</a>
-                      </li>
-                    ))}
-                  </ul>
-                  <p>
-                    Once you have downloaded and started the example resource
-                    server, you can visit the{" "}
-                    <a href="/messages">My Messages</a> page to see the
-                    authentication process in action.
-                  </p>
-                </div>
-              )}
-              {!this.state.authenticated && (
-                <div id="LandingPageBody">
-                  <LandingHeader />
-                  <ServiceOverview />
-                  <ContainerTwo />
-                </div>
+              <div>
+                {!this.state.authenticated && (
+                  <div id="LandingPageBody">
+                    <LandingHeader />
+                    <ServiceOverview />
+                    <ContainerTwo />
+                  </div>
+                )}
+              </div>
               )}
             </div>
-          )}
-        </div>
-      );
+          );
+        }
+      } else return null;
     }
   }
 );
 
 const mapStateToProps = state => ({});
-
-// export default connect(
-//   mapStateToProps,
-//   { getPricing }
-// )(LandingPage);

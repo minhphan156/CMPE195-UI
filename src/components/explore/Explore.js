@@ -4,7 +4,10 @@ import { Grow, Grid, Typography } from "@material-ui/core";
 import ExploreCard from "./ExploreCard";
 import FilterResult from "./FilterResult";
 import { connect } from "react-redux";
-import { getPostsActions } from "../../actions/getPostsActions";
+import {
+  getPostsActions,
+  setExploreStatus
+} from "../../actions/getPostsActions";
 import { withAuth } from "@okta/okta-react";
 import MDSpinner from "react-md-spinner";
 import moment from "moment";
@@ -102,7 +105,13 @@ class Explore extends Component {
         this.props.getPostsActions(token);
       })
       .catch(err => console.log(err));
+
+    this.props.setExploreStatus(true);
   }
+
+  componentWillUnmount = () => {
+    this.props.setExploreStatus(false);
+  };
 
   //this handle the highlight of button group
   handleAlignment = (event, alignment) => {
@@ -236,5 +245,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPostsActions }
+  { getPostsActions, setExploreStatus }
 )(withAuth(withStyles(styles)(Explore)));

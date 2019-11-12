@@ -54,11 +54,11 @@ class Post extends Component {
     let dataLinkButton;
     let dataLink;
 
-    if (upload !== null) {
+    if (upload != null) {
       dataLink = "/" + upload.metadata.dataset;
 
       // if there is a dataset, display a link to it
-      if (upload.metadata.dataset !== "null") {
+      if (upload.metadata.dataset != "") {
         dataLinkButton = (
           <Button size="medium" variant="outlined">
             <InsertLink className={classes.linkIcon} />
@@ -68,84 +68,90 @@ class Post extends Component {
       } else {
         dataLinkButton = <br />;
       }
-    }
 
-    return (
-      <div>
-        {upload ? (
-          <Grid
-            container
-            spacing={0}
-            direction="column"
-            justify="flex-start"
-            alignItems="center"
-          >
-            <Paper className="infoPaper">
-              <Grid container justify="space-between" alignItems="flex-start">
-                <Grid className="KnowledgePostTitle" item>
-                  {upload.metadata.title}
+      return (
+        <div>
+          {upload ? (
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              justify="flex-start"
+              alignItems="center"
+            >
+              <Paper className="infoPaper">
+                <Grid container justify="space-between" alignItems="flex-start">
+                  <Grid className="KnowledgePostTitle" item>
+                    {upload.metadata.title}
+                  </Grid>
+                  <Grid item>
+                    <Link to="Post">
+                      <Button
+                        onClick={this.handlePublish}
+                        class="publishbutton"
+                      >
+                        Publish
+                      </Button>
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link to="Post">
-                    <Button onClick={this.handlePublish} class="publishbutton">
-                      Publish
-                    </Button>
-                  </Link>
-                </Grid>
-              </Grid>
 
-              <Grid container justify="space-between" alignItems="flex-start">
+                <Grid container justify="space-between" alignItems="flex-start">
+                  <Grid className="KnowledgePostText" item>
+                    {upload.metadata.authors}
+                    <div className="KnowledgePostTime">
+                      {upload.metadata.time}
+                    </div>
+                  </Grid>
+                </Grid>
+
+                <Grid container justify="flex-end" alignItems="flex-start">
+                  <Grid className="DataSetButton" item>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={upload.metadata.dataset}
+                    >
+                      {dataLinkButton}
+                    </a>
+                  </Grid>
+                </Grid>
                 <Grid className="KnowledgePostText" item>
-                  {upload.metadata.authors}
-                  <div className="KnowledgePostTime">
-                    {upload.metadata.time}
-                  </div>
+                  {"Tags: "}
+                  {upload.metadata.tags.map(item => (
+                    <Chip
+                      color="primary"
+                      label={item}
+                      classes={{
+                        root: classes.chipRoot
+                      }}
+                    />
+                  ))}
                 </Grid>
-              </Grid>
 
-              <Grid container justify="flex-end" alignItems="flex-start">
-                <Grid className="DataSetButton" item>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={upload.metadata.dataset}
-                  >
-                    {dataLinkButton}
-                  </a>
+                <br />
+                <Grid className="KnowledgePostSummary" item>
+                  {upload.metadata.summary}
                 </Grid>
-              </Grid>
-              <Grid className="KnowledgePostText" item>
-                {"Tags: "}
-                {upload.metadata.tags.map(item => (
-                  <Chip
-                    color="primary"
-                    label={item}
-                    classes={{
-                      root: classes.chipRoot
-                    }}
+              </Paper>
+              <Paper className="notebookPaper">
+                <Grid>
+                  <div
+                    id="notebook-container"
+                    dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
                   />
-                ))}
-              </Grid>
-
-              <br />
-              <Grid className="KnowledgePostSummary" item>
-                {upload.metadata.summary}
-              </Grid>
-            </Paper>
-            <Paper className="notebookPaper">
-              <Grid>
-                <div
-                  id="notebook-container"
-                  dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
-                />
-              </Grid>
-            </Paper>
-            <br></br>
-            <br></br>
-          </Grid>
-        ) : null}
-      </div>
-    );
+                </Grid>
+              </Paper>
+              <br></br>
+              <br></br>
+            </Grid>
+          ) : null}
+        </div>
+      );
+    } else {
+      this.props.history.push("/explore");
+      return null;
+    }
   }
 }
 

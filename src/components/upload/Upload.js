@@ -122,7 +122,7 @@ class Upload extends Component {
         style={{
           marginLeft: "auto",
           marginRight: "auto",
-          width: "300px"
+          width: "400px"
         }}
       >
         <br></br>
@@ -143,6 +143,7 @@ class Upload extends Component {
             label="Title"
             margin="normal"
             variant="outlined"
+            required="true"
           />
           <TextField
             id="outlined-authors"
@@ -152,6 +153,7 @@ class Upload extends Component {
             label="Authors"
             margin="normal"
             variant="outlined"
+            required="true"
           />
           <TextField
             id="outlined-authors"
@@ -161,6 +163,8 @@ class Upload extends Component {
             label="Summary"
             margin="normal"
             variant="outlined"
+            required="true"
+            multiline="true"
           />
           <div
             style={{
@@ -182,7 +186,19 @@ class Upload extends Component {
               variant="display1"
               gutterBottom
             >
-              Tags
+              Tags *
+            </Typography>
+            <Typography
+              style={{
+                marginTop: 4,
+                marginLeft: 4,
+                fontSize: 9,
+                fontWeight: "bold"
+              }}
+              variant="display1"
+              gutterBottom
+            >
+              (Hit Enter after each Tag)
             </Typography>
             <MuiThemeProvider>
               <ChipInput
@@ -201,7 +217,7 @@ class Upload extends Component {
             value={this.state.dataset}
             onChange={this.onChange}
             name="dataset"
-            label="Link to Dataset (Optional)"
+            label="Link to Dataset"
             margin="normal"
             variant="outlined"
           />
@@ -233,7 +249,7 @@ class Upload extends Component {
             }}
           />
           {upload ? (
-            <div style={{ width: 350 }}>
+            <div style={{ width: 450 }}>
               <Link to="/preview" className="navbarMenuButtons">
                 <Button
                   type="submit"
@@ -241,7 +257,7 @@ class Upload extends Component {
                   color="primary"
                   style={{
                     marginTop: 10,
-                    width: 300,
+                    width: 400,
                     marginBottom: 15
                   }}
                 >
@@ -253,12 +269,12 @@ class Upload extends Component {
               />
             </div>
           ) : this.state.isSubmit ? (
-            <div style={{ width: 350 }}>
+            <div style={{ width: 450 }}>
               <Button
                 type="submit"
                 variant="contained"
                 color="default"
-                style={{ marginTop: 10, width: 300, marginBottom: 15 }}
+                style={{ marginTop: 10, width: 400, marginBottom: 15 }}
                 disabled={true}
               >
                 Preview
