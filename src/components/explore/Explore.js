@@ -171,6 +171,7 @@ class Explore extends Component {
       const renderCardListView = posts.map(post => (
         <Grid item xs={8}>
           <ExploreCard
+            history={this.props.history}
             hash_id={post.hash_id}
             title={post.title}
             summary={post.summary}

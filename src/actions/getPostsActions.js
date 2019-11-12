@@ -2,7 +2,8 @@ import {
   GET_POSTS,
   GET_FILTERED_POSTS,
   NO_POSTS_FOUND,
-  SET_EXPLORE_STATUS
+  SET_EXPLORE_STATUS,
+  GET_INDIVIDUAL_POST
 } from "./types";
 import axios from "axios";
 
@@ -89,6 +90,38 @@ export const getFilteredPostsActions = (
             type: GET_FILTERED_POSTS,
             payload: res.data
           });
+    })
+    .catch(err => {
+      console.log(err);
+      if (err.response !== undefined) {
+        console.log(err.response.data);
+      }
+    });
+};
+
+export const getIndividualPostsActions = (
+  post,
+  accessToken,
+  history
+) => dispatch => {
+ 
+  let config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+  console.log("getIndividualPostsActions-", post);
+  axios
+    .get(`http://localhost:3001/api/post/${post.hash_id}`, config)
+    .then(res => {
+      res.data.length < 1
+        ? dispatch({
+            type: NO_POSTS_FOUND,
+            payload: res.data
+          })
+        : dispatch({
+            type: GET_INDIVIDUAL_POST,
+            payload: res.data
+          });
+          history.push('/post');
     })
     .catch(err => {
       console.log(err);

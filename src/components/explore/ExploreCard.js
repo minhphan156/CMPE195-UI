@@ -10,6 +10,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import {
+  getIndividualPostsActions
+} from "../../actions/getPostsActions";
+import { withAuth } from "@okta/okta-react";
 
 const styles = {
   CardContainer: {
@@ -127,6 +132,16 @@ const styles = {
   }
 };
 class ExploreCard extends Component {
+  handleShowMore = () => {
+    this.props.auth
+    .getAccessToken()
+    .then(token => {
+      this.props.getIndividualPostsActions(this.props.post, token, this.props.history);
+    })
+    .catch(err => console.log(err));
+
+    // this.props.history.push("/post")
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -176,7 +191,7 @@ class ExploreCard extends Component {
         >
           <div>Published {this.props.create_at}</div>
 
-          <IconButton>
+          <IconButton onClick={this.handleShowMore}>
             <div className={classes.ShowMoreContainer}>
               <div className={classes.ShowMoreButton}>Show more</div>
               <ExpandMoreIcon className={classes.ShowMoreIcon} />
@@ -196,4 +211,11 @@ class ExploreCard extends Component {
   }
 }
 
-export default withStyles(styles)(ExploreCard);
+const mapStateToProps = state => ({
+  posts: state.posts
+});
+
+export default connect(
+  mapStateToProps,
+  { getIndividualPostsActions }
+)(withAuth(withStyles(styles)(ExploreCard)));

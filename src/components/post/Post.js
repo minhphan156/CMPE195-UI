@@ -52,32 +52,35 @@ const styles = theme => ({
 });
 
 class Post extends Component {
-  constructor() {
-    super();
-    this.state = {
-      // title: "",
-      // authors: "",
-      // time: "",
-      // tags: [],
-      // summary: "",
-      // dataset: null,
-      // notebook: null,
-      // isSubmit: false,
-      // views: 167
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     // title: "",
+  //     // authors: "",
+  //     // time: "",
+  //     // tags: [],
+  //     // summary: "",
+  //     // dataset: null,
+  //     // notebook: null,
+  //     // isSubmit: false,
+  //     // views: 167
+  //   };
+  // }
 
   render() {
+    console.log("POST VIEW RENDERING")
     const { classes } = this.props;
     const { upload } = this.props.upload;
+    const { individualPost } = this.props.posts;
+
     let dataLinkButton;
     let dataLink;
-
-    if (upload != null) {
-      dataLink = "/" + upload.metadata.dataset;
+    console.log('posts.individualPost-----',individualPost)
+    if (upload != null || individualPost != null) {
+      dataLink = "/" + (upload ? upload.metadata.dataset : "");
 
       // if there is a dataset, display a link to it
-      if (upload.metadata.dataset != "") {
+      if (upload ? upload.metadata.dataset !== "" : null) {
         dataLinkButton = (
           <Button size="medium" variant="outlined">
             <InsertLink className={classes.linkIcon} />
@@ -99,7 +102,7 @@ class Post extends Component {
           <Paper className="infoPaper">
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostTitle" item>
-                {upload.metadata.title}
+                {upload ? upload.metadata.title : ""|| individualPost.metadata.title}
               </Grid>
               <Grid item>
                 <Grid
@@ -109,9 +112,9 @@ class Post extends Component {
                   alignItems="flex-start"
                 >
                   <Grid className="viewContainer" className={classes.viewCount}>
-                    {upload.metadata.views == null
-                      ? "0"
-                      : upload.metadata.views}
+                    {upload
+                      ? upload.metadata.views
+                      : "0"}
                   </Grid>
                   <Grid className="viewContainer">
                     <Visibility className={classes.visibilityIcon} />
@@ -122,8 +125,8 @@ class Post extends Component {
 
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostText" item>
-                {upload.metadata.authors}
-                <div className="KnowledgePostTime">{upload.metadata.time}</div>
+                {upload ? upload.metadata.authors : "" || individualPost.metadata.authors}
+                <div className="KnowledgePostTime">{upload ? upload.metadata.time : "" || individualPost.metadata.createdAt}</div>
               </Grid>
             </Grid>
             <Grid container justify="flex-end" alignItems="flex-start">
@@ -140,7 +143,7 @@ class Post extends Component {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={upload.metadata.dataset}
+                  href={upload ? upload.metadata.dataset : "" ? upload.metadata.dataset : ""}
                 >
                   {dataLinkButton}
                 </a>
@@ -149,7 +152,7 @@ class Post extends Component {
 
             <Grid className="KnowledgePostText" item>
               {"Tags: "}
-              {upload.metadata.tags.map(item => (
+              {upload ? upload.metadata.tags.map(item => (
                 <Chip
                   color="primary"
                   label={item}
@@ -157,13 +160,28 @@ class Post extends Component {
                     root: classes.chipRoot
                   }}
                 />
-              ))}
+              ))
+              : null
+              } 
+
+              {individualPost.metadata.tags ? individualPost.metadata.tags.map(item => (
+                <Chip
+                  color="primary"
+                  label={item}
+                  classes={{
+                    root: classes.chipRoot
+                  }}
+                />
+              ))
+              : null
+              } 
+
             </Grid>
 
             <br />
 
             <Grid className="KnowledgePostSummary" item>
-              {upload.metadata.summary}
+              {upload ? upload.metadata.summary : "" || individualPost.metadata.summary}
             </Grid>
           </Paper>
 
@@ -171,7 +189,7 @@ class Post extends Component {
             <Grid>
               <div
                 id="notebook-container"
-                dangerouslySetInnerHTML={{ __html: upload.html.final_html }}
+                dangerouslySetInnerHTML={{ __html: upload ? upload.html.final_html : <div></div> || individualPost.html.final_html}}
               />
             </Grid>
           </Paper>
@@ -179,7 +197,9 @@ class Post extends Component {
           <br></br>
         </Grid>
       );
-    } else {
+    } 
+    else {
+      console.log('return null post')
       this.props.history.push("/explore");
       return null;
     }
@@ -188,7 +208,9 @@ class Post extends Component {
 
 // need to unpack the json object twice
 const mapStateToProps = state => ({
-  upload: state.upload
+  upload: state.upload,
+  posts: state.posts
+
   //********************/this should be removed by the completion of issue #36
   // metaData: state.metaData.metaData
 });
