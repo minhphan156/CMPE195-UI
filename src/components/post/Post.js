@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Visibility from "@material-ui/icons/Visibility";
 import InsertLink from "@material-ui/icons/InsertLink";
 import CloudDownload from "@material-ui/icons/CloudDownload";
-
+import moment from 'moment';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -109,7 +109,7 @@ class Post extends Component {
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostText" item>
                 {upload.metadata.authors}
-                <div className="KnowledgePostTime">{upload.metadata.time || upload.metadata.createdAt}</div>
+                <div className="KnowledgePostTime">{moment(upload.metadata.createdAt).format("MMMM DD, YYYY hh:mm:ss")}</div>
               </Grid>
             </Grid>
             <Grid container justify="flex-end" alignItems="flex-start">
