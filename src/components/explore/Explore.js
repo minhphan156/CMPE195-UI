@@ -95,6 +95,7 @@ class Explore extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.auth
       .getAccessToken()
       .then(token => {
@@ -169,6 +170,7 @@ class Explore extends Component {
             tags={post.tags}
             preview_img={post.preview_img}
             authors={post.authors}
+            post={post}
           />
         </Grid>
       ));
