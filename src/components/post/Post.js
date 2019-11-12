@@ -189,7 +189,7 @@ class Post extends Component {
             <Grid>
               <div
                 id="notebook-container"
-                dangerouslySetInnerHTML={{ __html: upload ? upload.html.final_html : <div></div> || individualPost.html.final_html}}
+                dangerouslySetInnerHTML={{ __html: upload ? upload.html.final_html : <div></div> || individualPost.html}}
               />
             </Grid>
           </Paper>
