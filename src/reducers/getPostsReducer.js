@@ -3,7 +3,6 @@ import {
   GET_FILTERED_POSTS,
   NO_POSTS_FOUND,
   SET_EXPLORE_STATUS,
-  GET_INDIVIDUAL_POST
 } from "../actions/types";
 
 var initialState = {
@@ -37,11 +36,7 @@ export default function(state = initialState, action) {
         ...state,
         isInExplore: action.payload
       };
-    case GET_INDIVIDUAL_POST:
-        return {
-          ...state,
-          individualPost: action.payload
-        };
+   
     default:
       return state;
   }

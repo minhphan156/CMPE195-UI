@@ -71,16 +71,14 @@ class Post extends Component {
     console.log("POST VIEW RENDERING")
     const { classes } = this.props;
     const { upload } = this.props.upload;
-    const { individualPost } = this.props.posts;
 
     let dataLinkButton;
     let dataLink;
-    console.log('posts.individualPost-----',individualPost)
-    if (upload != null || individualPost != null) {
-      dataLink = "/" + (upload ? upload.metadata.dataset : "");
+    if (upload != null) {
+      dataLink = "/" + upload.metadata.dataset;
 
       // if there is a dataset, display a link to it
-      if (upload ? upload.metadata.dataset !== "" : null) {
+      if (upload.metadata.dataset !== "") {
         dataLinkButton = (
           <Button size="medium" variant="outlined">
             <InsertLink className={classes.linkIcon} />
@@ -102,7 +100,7 @@ class Post extends Component {
           <Paper className="infoPaper">
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostTitle" item>
-                {upload ? upload.metadata.title : ""|| individualPost.metadata.title}
+                {upload.metadata.title}
               </Grid>
               <Grid item>
                 <Grid
@@ -125,8 +123,8 @@ class Post extends Component {
 
             <Grid container justify="space-between" alignItems="flex-start">
               <Grid className="KnowledgePostText" item>
-                {upload ? upload.metadata.authors : "" || individualPost.metadata.authors}
-                <div className="KnowledgePostTime">{upload ? upload.metadata.time : "" || individualPost.metadata.createdAt}</div>
+                {upload.metadata.authors}
+                <div className="KnowledgePostTime">{upload.metadata.time || upload.metadata.createdAt}</div>
               </Grid>
             </Grid>
             <Grid container justify="flex-end" alignItems="flex-start">
@@ -143,7 +141,7 @@ class Post extends Component {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={upload ? upload.metadata.dataset : "" ? upload.metadata.dataset : ""}
+                  href={upload.metadata.dataset ? upload.metadata.dataset : ""}
                 >
                   {dataLinkButton}
                 </a>
@@ -152,7 +150,7 @@ class Post extends Component {
 
             <Grid className="KnowledgePostText" item>
               {"Tags: "}
-              {upload ? upload.metadata.tags.map(item => (
+              {upload.metadata.tags.map(item => (
                 <Chip
                   color="primary"
                   label={item}
@@ -161,19 +159,6 @@ class Post extends Component {
                   }}
                 />
               ))
-              : null
-              } 
-
-              {individualPost.metadata.tags ? individualPost.metadata.tags.map(item => (
-                <Chip
-                  color="primary"
-                  label={item}
-                  classes={{
-                    root: classes.chipRoot
-                  }}
-                />
-              ))
-              : null
               } 
 
             </Grid>
@@ -181,7 +166,7 @@ class Post extends Component {
             <br />
 
             <Grid className="KnowledgePostSummary" item>
-              {upload ? upload.metadata.summary : "" || individualPost.metadata.summary}
+              {upload.metadata.summary}
             </Grid>
           </Paper>
 
@@ -189,7 +174,7 @@ class Post extends Component {
             <Grid>
               <div
                 id="notebook-container"
-                dangerouslySetInnerHTML={{ __html: upload ? upload.html.final_html : <div></div> || individualPost.html}}
+                dangerouslySetInnerHTML={{ __html: upload.html.final_html || upload.html}}
               />
             </Grid>
           </Paper>
@@ -209,7 +194,6 @@ class Post extends Component {
 // need to unpack the json object twice
 const mapStateToProps = state => ({
   upload: state.upload,
-  posts: state.posts
 
   //********************/this should be removed by the completion of issue #36
   // metaData: state.metaData.metaData
