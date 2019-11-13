@@ -43,9 +43,7 @@ export const uploadNotebookFinal = (history, accessToken) => dispatch => {
         withCredentials: true
       }
     )
-    .then(res => {
-      // history.push("/explore");
-    })
+    .then(res => {})
     .catch(err => {
       console.log(err);
       if (err.response !== undefined) {
