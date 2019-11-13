@@ -1,4 +1,4 @@
-import { UPLOAD, GET_INDIVIDUAL_POST } from "../actions/types";
+import { UPLOAD, GET_INDIVIDUAL_POST, CLEAR_UPLOAD } from "../actions/types";
 
 const initialState = {
   upload: null
@@ -22,6 +22,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         upload: action.payload
+      };
+    case CLEAR_UPLOAD:
+      return {
+        ...state,
+        upload: null
       };
     default:
       return state;

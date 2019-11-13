@@ -11,7 +11,7 @@ import {
 import { withAuth } from "@okta/okta-react";
 import MDSpinner from "react-md-spinner";
 import moment from "moment";
-import { KeyboardArrowDown, KeyboardArrowUp, Sort } from "@material-ui/icons"; // import { Button } from "semantic-ui-react";
+import { KeyboardArrowDown, KeyboardArrowUp, Sort } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 
 const styles = {
@@ -243,7 +243,6 @@ const mapStateToProps = state => ({
   posts: state.posts
 });
 
-export default connect(
-  mapStateToProps,
-  { getPostsActions, setExploreStatus }
-)(withAuth(withStyles(styles)(Explore)));
+export default connect(mapStateToProps, { getPostsActions, setExploreStatus })(
+  withAuth(withStyles(styles)(Explore))
+);

@@ -3,7 +3,8 @@ import {
   GET_FILTERED_POSTS,
   NO_POSTS_FOUND,
   SET_EXPLORE_STATUS,
-  GET_INDIVIDUAL_POST
+  GET_INDIVIDUAL_POST,
+  CLEAR_UPLOAD
 } from "./types";
 import axios from "axios";
 
@@ -100,7 +101,7 @@ export const getIndividualPostsActions = (
   history
 ) => dispatch => {
   let config = {
-    headers: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${accessToken}` }
   };
   axios
     .get(`http://localhost:3001/api/post/${post.hash_id}`, config)
@@ -114,7 +115,7 @@ export const getIndividualPostsActions = (
             type: GET_INDIVIDUAL_POST,
             payload: res.data
           });
-          history.push('/post');
+      history.push("/post");
     })
     .catch(err => {
       console.log(err);
@@ -128,5 +129,11 @@ export const setExploreStatus = route => dispatch => {
   dispatch({
     type: SET_EXPLORE_STATUS,
     payload: route
+  });
+};
+
+export const clearUpload = () => dispatch => {
+  dispatch({
+    type: CLEAR_UPLOAD
   });
 };

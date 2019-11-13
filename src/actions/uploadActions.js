@@ -1,7 +1,11 @@
 import { UPLOAD } from "./types";
 import axios from "axios";
 
-export const uploadNotebookDraft = (uploadData, history, accessToken) => dispatch => {
+export const uploadNotebookDraft = (
+  uploadData,
+  history,
+  accessToken
+) => dispatch => {
   // Inject form data
   var formData = new FormData();
   Object.keys(uploadData).forEach(key => {
@@ -31,12 +35,16 @@ export const uploadNotebookDraft = (uploadData, history, accessToken) => dispatc
 
 export const uploadNotebookFinal = (history, accessToken) => dispatch => {
   axios
-    .put("http://localhost:3001/api/post",{}, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      withCredentials: true
-    })
+    .put(
+      "http://localhost:3001/api/post",
+      {},
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+        withCredentials: true
+      }
+    )
     .then(res => {
-      history.push("/explore");
+      // history.push("/explore");
     })
     .catch(err => {
       console.log(err);
