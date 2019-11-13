@@ -7,13 +7,14 @@ import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 import { withStyles } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 import Visibility from "@material-ui/icons/Visibility";
 import InsertLink from "@material-ui/icons/InsertLink";
 import CloudDownload from "@material-ui/icons/CloudDownload";
 import { clearUpload } from "../../actions/getPostsActions";
+import moment from 'moment';
+import axios from "axios";
+import { withAuth } from "@okta/okta-react";
 
-import moment from "moment";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -54,12 +55,34 @@ const styles = theme => ({
 });
 
 class Post extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onDownloadNotebookClick = this.onDownloadNotebookClick.bind(this);
+  }
+  
   async componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {
     this.props.clearUpload();
+  }
+  
+  async onDownloadNotebookClick() {
+    const { auth, upload } = this.props;
+    const { getAccessToken } = auth;
+    const { hashID } = upload.upload;
+    
+    const token = await getAccessToken();
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true
+    }
+    
+    const getNotebookLinkPath = `http://0.0.0.0:3001/api/notebook/${hashID}`;
+    const response = await axios.get(getNotebookLinkPath, config);
+    window.location = response.data.downloadLink
   }
 
   render() {
@@ -125,12 +148,10 @@ class Post extends Component {
             </Grid>
             <Grid container justify="flex-end" alignItems="flex-start">
               <Grid item>
-                <Link to="/DOWNLOAD" className="PostButtons">
-                  <Button size="medium" variant="outlined">
-                    <CloudDownload className={classes.downloadIcon} />
-                    ipynb
-                  </Button>
-                </Link>
+                <Button size="medium" variant="outlined" onClick={this.onDownloadNotebookClick}>
+                  <CloudDownload className={classes.downloadIcon} />
+                  ipynb
+                </Button>
               </Grid>
 
               <Grid item>
@@ -191,6 +212,6 @@ const mapStateToProps = state => ({
   upload: state.upload
 });
 
-export default withStyles(styles)(
+export default withAuth(withStyles(styles)(
   connect(mapStateToProps, { clearUpload })(Post)
-);
+));
