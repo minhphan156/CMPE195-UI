@@ -85,7 +85,7 @@ class Post extends Component {
                     {upload.metadata.title}
                   </Grid>
                   <Grid item>
-                    <Link to="Post">
+                    <Link to="Explore">
                       <Button
                         onClick={this.handlePublish}
                         class="publishbutton"
@@ -161,8 +161,5 @@ const mapStateToProps = state => ({
 });
 
 export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    { uploadNotebookFinal }
-  )(withAuth(Post))
+  connect(mapStateToProps, { uploadNotebookFinal })(withAuth(Post))
 );

@@ -8,12 +8,10 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { KeyboardArrowRight } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import {
-  getIndividualPostsActions
-} from "../../actions/getPostsActions";
+import { getIndividualPostsActions } from "../../actions/getPostsActions";
 import { withAuth } from "@okta/okta-react";
 
 const styles = {
@@ -82,18 +80,20 @@ const styles = {
     fontSize: 13
   },
   ShowMoreContainer: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    flexDirection: "column"
   },
   ShowMoreButton: {
     fontSize: 13,
     textTransform: "none",
-    padding: 0,
+    paddingBottom: 9,
+    paddingLeft: 7,
+    paddingRight: 7,
     color: "#F0605C"
   },
   ShowMoreIcon: {
+    position: "relative",
     padding: 0,
+    top: 7,
     color: "#F0605C"
   },
   CardActionRight: {
@@ -134,12 +134,16 @@ const styles = {
 class ExploreCard extends Component {
   handleShowMore = () => {
     this.props.auth
-    .getAccessToken()
-    .then(token => {
-      this.props.getIndividualPostsActions(this.props.post, token, this.props.history);
-    })
-    .catch(err => console.log(err));
-  }
+      .getAccessToken()
+      .then(token => {
+        this.props.getIndividualPostsActions(
+          this.props.post,
+          token,
+          this.props.history
+        );
+      })
+      .catch(err => console.log(err));
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -191,8 +195,10 @@ class ExploreCard extends Component {
 
           <IconButton onClick={this.handleShowMore}>
             <div className={classes.ShowMoreContainer}>
-              <div className={classes.ShowMoreButton}>Show more</div>
-              <ExpandMoreIcon className={classes.ShowMoreIcon} />
+              <div className={classes.ShowMoreButton}>
+                Show more{" "}
+                <KeyboardArrowRight className={classes.ShowMoreIcon} />
+              </div>
             </div>
           </IconButton>
 
@@ -213,7 +219,6 @@ const mapStateToProps = state => ({
   posts: state.posts
 });
 
-export default connect(
-  mapStateToProps,
-  { getIndividualPostsActions }
-)(withAuth(withStyles(styles)(ExploreCard)));
+export default connect(mapStateToProps, { getIndividualPostsActions })(
+  withAuth(withStyles(styles)(ExploreCard))
+);
