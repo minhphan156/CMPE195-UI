@@ -95,12 +95,14 @@ class Post extends Component {
       dataLink = "/" + upload.metadata.dataset;
 
       // if there is a dataset, display a link to it
-      if (upload.metadata.dataset != null) {
+      if (upload.metadata.datasetLink != null) {
         dataLinkButton = (
-          <Button size="medium" variant="outlined">
-            <InsertLink className={classes.linkIcon} />
-            Data Set
-          </Button>
+          <a href={upload.metadata.datasetLink} target="_blank" rel="noopener noreferrer">
+            <Button size="medium" variant="outlined">
+              <InsertLink className={classes.linkIcon} />
+              Data Set
+            </Button>
+          </a>
         );
       } else {
         dataLinkButton = <br />;
