@@ -80,9 +80,7 @@ const styles = {
     fontSize: 13
   },
   ShowMoreContainer: {
-    // display: "flex",
     flexDirection: "column"
-    // alignItems: "center"
   },
   ShowMoreButton: {
     fontSize: 13,
@@ -201,7 +199,6 @@ class ExploreCard extends Component {
                 Show more{" "}
                 <KeyboardArrowRight className={classes.ShowMoreIcon} />
               </div>
-              {/* <ExpandMoreIcon className={classes.ShowMoreIcon} /> */}
             </div>
           </IconButton>
 
