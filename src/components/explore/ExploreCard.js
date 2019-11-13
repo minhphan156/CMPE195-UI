@@ -207,7 +207,6 @@ class ExploreCard extends Component {
             <div className={classes.CardActionRightText}>
               {this.props.views}
             </div>
-            <div className={classes.CardActionRightDocType}>PDF</div>
           </div>
         </CardActions>
       </Card>

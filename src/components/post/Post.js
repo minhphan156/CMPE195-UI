@@ -63,6 +63,9 @@ class Post extends Component {
   
   async componentDidMount() {
     window.scrollTo(0, 0);
+
+    // Here we tell MathJax to update and render all math 
+    window.MathJax.Hub.Queue(["Typeset",window.MathJax.Hub]);
   }
 
   componentWillUnmount() {
