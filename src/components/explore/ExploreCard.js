@@ -178,7 +178,7 @@ class ExploreCard extends Component {
             </CardContent>
           </div>
           <CardMedia
-            image={require("../../assets/Insert_image_here.png")}
+            image={this.props.preview_img}
             title="Insert Image Here"
             className={classes.CardImage}
           />
