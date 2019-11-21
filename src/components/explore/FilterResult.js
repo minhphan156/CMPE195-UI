@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Button, Card, Typography } from "@material-ui/core";
 import { DatePicker, MuiPickersUtilsProvider } from "material-ui-pickers";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import moment from "@date-io/moment";
 import ChipInput from "material-ui-chip-input";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -13,7 +11,7 @@ import { getFilteredPostsActions } from "../../actions/getPostsActions";
 
 const styles = {
   FilterContainer: {
-    width: 240,
+    width: 250,
     paddingBottom: 10,
     position: "fixed"
   },
@@ -150,7 +148,7 @@ class FilterResult extends Component {
         </div>
 
         <div
-          style={{ marginLeft: 10, display: "flex", flexDirection: "column" }}
+          style={{ marginLeft: 10, marginRight: 10, display: "flex", flexDirection: "column" }}
         >
           <div>
             <Typography variant="h6" className={classes.SubHeader} gutterBottom>
@@ -195,39 +193,6 @@ class FilterResult extends Component {
               />
             </MuiThemeProvider>
           </div>
-          <div>
-            <ToggleButtonGroup
-              value={alignment}
-              exclusive
-              onChange={this.handleAlignment}
-              className={classes.ToggleButtonGroupContainer}
-            >
-              <ToggleButton
-                className={classes.FilterButtonGroup}
-                classes={{ selected: classes.selectedButton }}
-                value="left"
-              >
-                Viewed
-              </ToggleButton>
-
-              <ToggleButton
-                classes={{ selected: classes.selectedButton }}
-                className={classes.FilterButtonGroup}
-                value="center"
-              >
-                Unviewed
-              </ToggleButton>
-
-              <ToggleButton
-                classes={{ selected: classes.selectedButton }}
-                className={classes.FilterButtonGroup}
-                value="right"
-              >
-                All
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </div>
-
           <Button
             variant="contained"
             color="secondary"
