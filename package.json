@@ -9,7 +9,7 @@
     "@material-ui/lab": "^3.0.0-alpha.30",
     "@okta/okta-react": "^1.2.0",
     "@okta/okta-signin-widget": "^2.15.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "dompurify": "^1.0.10",
     "dotenv": "^6.2.0",
